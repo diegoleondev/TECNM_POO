@@ -36,16 +36,24 @@ public class Alumno {
   }
 
   public void capturar () {
-    Scanner scanner = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
     
     System.out.println("\nIngrese los datos del \"Alumno\"");
-    System.out.printf("%-11s: ", "No. Control"); numeroControl = scanner.nextLine();
-    System.out.printf("%-11s: ", "Nombre"); nombre = scanner.nextLine();
-    System.out.printf("%-11s: ", "Telefono"); telefono = scanner.nextLine();
-    System.out.printf("%-11s: ", "Carrera"); carrera = scanner.nextLine();
-    System.out.printf("%-11s: ", "Genero"); genero = scanner.nextLine().charAt(0);
 
-    scanner.close();
+    System.out.print( "No. Control: "); 
+    numeroControl = sc.nextLine();
+    
+    System.out.print( "Nombre: ");
+    nombre = sc.nextLine();
+
+    System.out.print( "Telefono: ");
+    telefono = sc.nextLine();
+
+    System.out.print( "Carrera: "); 
+    carrera = sc.nextLine();
+
+    System.out.print( "Genero: ");
+    genero = sc.nextLine().charAt(0);
   }
 
   public boolean isEquals (String numeroControl) {

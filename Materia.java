@@ -33,13 +33,19 @@ public class Materia {
   public void capturar (){
     Scanner scanner = new Scanner(System.in);
 
-    System.out.println("\nIngrese los datos de la \"Materia\"");
-    System.out.printf("%-10s:","Clave"); clave =  scanner.nextLine();
-    System.out.printf("%-10s:","Nombre"); nombre = scanner.nextLine();
-    System.out.printf("%-10s:","Unidades"); unidades = scanner.nextLine();
-    System.out.printf("%-10s:","SATCA"); satca = scanner.nextInt();
-    
-    scanner.close();
+    System.out.println("\nIngrese los datos de la Materia");
+
+    System.out.print("Clave: "); 
+    clave =  scanner.nextLine();
+
+    System.out.print("Nombre: "); 
+    nombre = scanner.nextLine();
+
+    System.out.print("Unidades: ");
+    unidades = scanner.nextLine();
+
+    System.out.print("SATCA: ");
+    satca = scanner.nextInt();
   }
 
   public boolean isEquals (String clave) {

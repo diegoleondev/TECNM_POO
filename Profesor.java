@@ -39,13 +39,21 @@ public class Profesor {
     Scanner scanner = new Scanner(System.in);
 
     System.out.println("\nIngrese los datos del \"Profesor\"");
-    System.out.printf("%-15s:","Correo"); correo =  scanner.nextLine();
-    System.out.printf("%-15s:","Especializacion"); especializacion = scanner.nextLine();
-    System.out.printf("%-15s:","Nombre"); nombre = scanner.nextLine();
-    System.out.printf("%-15s:","RFC"); rfc = scanner.nextLine();
-    System.out.printf("%-15s:","Telefono"); telefono = scanner.nextLine();
-    
-    scanner.close();
+
+    System.out.print("Correo: "); 
+    correo =  scanner.nextLine();
+
+    System.out.print("Especializacion: "); 
+    especializacion = scanner.nextLine();
+
+    System.out.print("Nombre: "); 
+    nombre = scanner.nextLine();
+
+    System.out.print("RFC: "); 
+    rfc = scanner.nextLine();
+
+    System.out.print("Telefono: "); 
+    telefono = scanner.nextLine();
   }
 
   public boolean isEquals (String rfc) {

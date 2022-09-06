@@ -23,7 +23,7 @@ public class Aula {
 
   // Logica de la clase
   public void  mostrar () {
-    System.out.println("\nDatos del \"Aula\"");
+    System.out.println("\nDatos del Aula");
     System.out.printf("%-10s: %s\n", "Edificio", edificio);
     System.out.printf("%-10s: %s\n", "Nombre", nombre);
     System.out.printf("%-10s: %s\n", "Capasidad", capacidad);
@@ -31,16 +31,21 @@ public class Aula {
   }
 
   public void capturar (){
-    Scanner scanner = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
 
-    System.out.println("\nIngrese los datos del \"Aula\"");
-    System.out.printf("%-10s:","Edificio"); edificio =  scanner.nextLine();
-    System.out.printf("%-10s:","Nombre"); nombre = scanner.nextLine();
-    System.out.printf("%-10s:","Capasidad"); capacidad = scanner.nextInt();
-    System.out.printf("%-10s:","a) Aula  b) Laboratorio"); 
-    aula = (scanner.next().charAt(0) == 'a') ? true : false;
-    
-    scanner.close();
+    System.out.println("\nIngrese los datos del Aula");
+
+    System.out.print("Edificio: "); 
+    edificio = sc.nextLine();
+
+    System.out.print("Nombre: "); 
+    nombre = sc.nextLine();
+
+    System.out.print("Capasidad: "); 
+    capacidad = sc.nextInt();
+
+    System.out.print("a) Aula  b) Laboratorio: "); 
+    aula = (sc.next().charAt(0) == 'a') ? true : false;
   }
   
   public boolean isEquals (String nombre, String edificio) {

@@ -27,7 +27,7 @@ public class Curso {
 
   // Loguica de la la clase
   public void  mostrar () {
-    System.out.println("\nDatos del \"Curso\"");
+    System.out.println("\nDatos del Curso");
     System.out.printf("%-10s: %s\n", "Clave", clave);
     System.out.printf("%-10s: %s\n", "Clase", nombre);
     System.out.printf("%-10s: %s\n", "Periodo", periodo);
@@ -36,17 +36,24 @@ public class Curso {
   }
 
   public void capturar (){
-    Scanner scanner = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
 
-    System.out.println("\nIngrese los datos del \"Curso\"");
-    System.out.printf("%-10s:","Clave"); clave =  scanner.nextLine();
-    System.out.printf("%-10s:","Nombre"); nombre = scanner.nextLine();
-    System.out.printf("%-10s:","Periodo"); periodo = scanner.nextLine();
-    System.out.printf("%-10s:","Horario"); horario = scanner.nextLine();
-    System.out.printf("%-10s:","a) Precencial b) Distancia");
-    presencial = (scanner.next() == "a") ? true : false;
+    System.out.println("\nIngrese los datos del Curso");
+    
+    System.out.print("Clave: "); 
+    clave =  sc.nextLine();
 
-    scanner.close();
+    System.out.print("Nombre: ");
+    nombre = sc.nextLine();
+
+    System.out.print("Periodo: "); 
+    periodo = sc.nextLine();
+
+    System.out.print("Horario: ");
+    horario = sc.nextLine();
+
+    System.out.print("a) Precencial b) Distancia : ");
+    presencial = (sc.next() == "a") ? true : false;
   }
 
   public boolean isEquals (String clave) {

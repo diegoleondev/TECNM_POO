@@ -1,24 +1,29 @@
 public class App {
   public static void main(String []args) {
     Alumno alumno = new Alumno();
+    alumno.capturar();
+    alumno.mostrar();
+    System.out.println("------------------------");
+
     Aula aula = new Aula();
+    aula.capturar();
+    aula.mostrar();
+    System.out.println("------------------------");
+
     Curso curso = new Curso();
+    curso.capturar();
+    curso.mostrar();
+    System.out.println("------------------------");
+
     Materia materia = new Materia();
+    materia.capturar();
+    materia.mostrar();
+    System.out.println("------------------------");
+
     Profesor profesor = new Profesor();
-
-    /* alumno.capturar();
-    alumno.mostrar(); */
-
-    /* aula.capturar();
-    aula.mostrar(); */
-
-    /* curso.capturar();
-    curso.mostrar(); */
-
-    /* materia.capturar();
-    materia.mostrar(); */
-
-    /* profesor.capturar();
-    profesor.mostrar(); */
+    profesor.capturar();
+    profesor.mostrar();
+    System.out.println("------------------------");
+    
   } 
 }
