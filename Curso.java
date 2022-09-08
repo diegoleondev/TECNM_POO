@@ -45,16 +45,17 @@ public class Curso {
   }
 
   public void listarAlumnos () {
-    String format = "%-20s %-12s %-8s %-7s %-11s\n";
+    String format = "%-6s %-20s %-12s %-8s %-7s %-11s\n";
 
     System.out.println("Alumnos del curso: " + nombre);
-    System.out.printf(format,"Nombre", "No. Control", "Carrera", "Genero", "Telefono");
+    System.out.printf(format,"Index", "Nombre", "No. Control", "Carrera", "Genero", "Telefono");
     
     for (int i = 0; i < cAlumnos; i++) {
       Alumno alumno = alumnos[i];
 
       System.out.printf(
-        format, 
+        format,
+        i + 1 + "", 
         alumno.getNombre(), 
         alumno.getNumeroControl(), 
         alumno.getCarrera(),
