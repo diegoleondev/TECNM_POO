@@ -8,6 +8,9 @@ public class Curso {
   private String nombre;
   private String horario;
 
+  Alumno alumnos[] = new Alumno[500];
+  int cAlumnos;
+
   // Constructores
   public Curso (String clave, String nombre, boolean presencial, String periodo, String horario) {
     this.clave = clave;
@@ -15,6 +18,7 @@ public class Curso {
     this.presencial = presencial;
     this.periodo = periodo;
     this.horario = horario;
+    inicializarDatos();
   }
   
   public Curso () {
@@ -23,11 +27,47 @@ public class Curso {
     this.presencial = false;
     this.periodo = "";
     this.horario = "";    
+
+    inicializarDatos();
+  }
+
+  private void inicializarDatos () {
+    cAlumnos = 0;
   }
 
   // Loguica de la la clase
+
+  public void agregarAlumnos (Alumno[] alumnos) {
+    for (int i = 0; i < alumnos.length; i++) {
+      this.alumnos[cAlumnos] = alumnos[i];
+      cAlumnos++;
+    }
+  }
+
+  public void listarAlumnos () {
+    String format = "%-20s %-12s %-8s %-7s %-11s\n";
+
+    System.out.println("Alumnos del curso: " + nombre);
+    System.out.printf(format,"Nombre", "No. Control", "Carrera", "Genero", "Telefono");
+    
+    for (int i = 0; i < cAlumnos; i++) {
+      Alumno alumno = alumnos[i];
+
+      System.out.printf(
+        format, 
+        alumno.getNombre(), 
+        alumno.getNumeroControl(), 
+        alumno.getCarrera(),
+        alumno.getGenero(),
+        alumno.getTelefono()
+      );
+    }
+
+    System.out.println("");
+  }
+
   public void  mostrar () {
-    System.out.println("\nDatos del Curso");
+    System.out.println("\nDatos del Curso: " + nombre);
     System.out.printf("%-10s: %s\n", "Clave", clave);
     System.out.printf("%-10s: %s\n", "Clase", nombre);
     System.out.printf("%-10s: %s\n", "Periodo", periodo);

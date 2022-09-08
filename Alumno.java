@@ -27,7 +27,7 @@ public class Alumno {
 
   // Loguica de la la clase
   public void mostrar () {
-    System.out.println("\nDatos del \"Alumno\"");
+    System.out.println("\nDatos del Alumno: " + nombre);
     System.out.printf("%-11s: %s\n", "No. Control", numeroControl);
     System.out.printf("%-11s: %s\n", "Nombre", nombre);
     System.out.printf("%-11s: %s\n", "Telefono", telefono);
