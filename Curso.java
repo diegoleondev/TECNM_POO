@@ -18,14 +18,14 @@ public class Curso {
 
   // CONSTRUCTORES
   public Curso(String clave, String nombre, boolean presencial, String periodo, String horario, String claveMateria,
-      String nombreMateria, String unidades, int satca) {
+      String unidades, String satca) {
     this.clave = clave;
     this.nombre = nombre;
     this.presencial = presencial;
     this.periodo = periodo;
     this.horario = horario;
 
-    materia = new Materia(claveMateria, nombreMateria, unidades, satca);
+    materia = new Materia(claveMateria, nombre, unidades, satca);
 
     inicializarDatos();
   }

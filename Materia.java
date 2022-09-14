@@ -4,10 +4,10 @@ public class Materia {
   private String clave;
   private String nombre;
   private String unidades;
-  private int satca;
+  private String satca;
 
   // Constructores
-  public Materia(String clave, String nombre, String unidades, int satca) {
+  public Materia(String clave, String nombre, String unidades, String satca) {
     this.clave = clave;
     this.nombre = nombre;
     this.unidades = unidades;
@@ -18,7 +18,7 @@ public class Materia {
     this.clave = "";
     this.nombre = "";
     this.unidades = "";
-    this.satca = 0;
+    this.satca = "0-0-0";
   }
 
   // LOGICA DE LA CLASE
@@ -47,7 +47,7 @@ public class Materia {
     unidades = scanner.nextLine();
 
     System.out.print("SATCA: ");
-    satca = scanner.nextInt();
+    satca = scanner.nextLine();
   }
 
   public boolean isEquals(String clave) {
@@ -83,11 +83,11 @@ public class Materia {
     this.unidades = unidades;
   }
 
-  public int getSatca() {
+  public String getSatca() {
     return satca;
   }
 
-  public void setSatca(int satca) {
+  public void setSatca(String satca) {
     this.satca = satca;
   }
 }
