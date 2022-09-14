@@ -8,86 +8,131 @@ public class Curso {
   private String nombre;
   private String horario;
 
-  Alumno alumnos[] = new Alumno[500];
-  int cAlumnos;
+  private Alumno alumnos[] = new Alumno[40];
+  private Aula aulas[] = new Aula[5];
+  private Profesor profesor;
+  private Materia materia;
 
-  // Constructores
-  public Curso (String clave, String nombre, boolean presencial, String periodo, String horario) {
+  private int cAlumnos;
+  private int cAulas;
+
+  // CONSTRUCTORES
+  public Curso(String clave, String nombre, boolean presencial, String periodo, String horario, String claveMateria,
+      String nombreMateria, String unidades, int satca) {
     this.clave = clave;
     this.nombre = nombre;
     this.presencial = presencial;
     this.periodo = periodo;
     this.horario = horario;
+
+    materia = new Materia(claveMateria, nombreMateria, unidades, satca);
+
     inicializarDatos();
   }
-  
-  public Curso () {
+
+  public Curso() {
     this.clave = "";
     this.nombre = "";
     this.presencial = false;
     this.periodo = "";
-    this.horario = "";    
+    this.horario = "";
 
     inicializarDatos();
   }
 
-  private void inicializarDatos () {
+  private void inicializarDatos() {
     cAlumnos = 0;
+    cAulas = 0;
   }
 
-  // Loguica de la la clase
-
-  public void agregarAlumnos (Alumno[] alumnos) {
-    for (int i = 0; i < alumnos.length; i++) {
-      this.alumnos[cAlumnos] = alumnos[i];
-      cAlumnos++;
-    }
+  // LOGICA DE LA CLASE
+  public void agregarAlumno(String numeroControl, String nombre, String telefono, String carrera, char genero) {
+    alumnos[cAlumnos++] = new Alumno(numeroControl, nombre, telefono, carrera, genero);
   }
 
-  public void listarAlumnos () {
-    String format = "%-6s %-20s %-12s %-8s %-7s %-11s\n";
+  public void asignarPrefesor(String correo, String especializacion, String nombre, String rfc, String telefono) {
+    profesor = new Profesor(correo, especializacion, nombre, rfc, telefono);
+  }
 
-    System.out.println("Alumnos del curso: " + nombre);
-    System.out.printf(format,"Index", "Nombre", "No. Control", "Carrera", "Genero", "Telefono");
-    
+  public void agregarAulas(boolean aula, int capacidad, String edificio, String nombre) {
+    aulas[cAulas++] = new Aula(aula, capacidad, edificio, nombre);
+  }
+
+  public void mostrarProfesor() {
+    profesor.mostrar();
+    System.out.println("");
+  }
+
+  public void mostrarMateria() {
+    materia.mostrar();
+    System.out.println("");
+  }
+
+  public void listarAlumnos() {
+    String format = "%-2s %-20s %-13s %-8s %-7s %-11s\n";
+
+    System.out.println("Alumnos:");
+    System.out.printf(format, "n", "Nombre", "No. Control", "Carrera", "Genero", "Telefono");
+
     for (int i = 0; i < cAlumnos; i++) {
       Alumno alumno = alumnos[i];
 
       System.out.printf(
-        format,
-        i + 1 + "", 
-        alumno.getNombre(), 
-        alumno.getNumeroControl(), 
-        alumno.getCarrera(),
-        alumno.getGenero(),
-        alumno.getTelefono()
-      );
+          format,
+          i + 1 + "",
+          alumno.getNombre(),
+          alumno.getNumeroControl(),
+          alumno.getCarrera(),
+          alumno.getGenero(),
+          alumno.getTelefono());
     }
-
     System.out.println("");
   }
 
-  public void  mostrar () {
-    System.out.println("\nDatos del Curso: " + nombre);
-    System.out.printf("%-10s: %s\n", "Clave", clave);
-    System.out.printf("%-10s: %s\n", "Clase", nombre);
-    System.out.printf("%-10s: %s\n", "Periodo", periodo);
-    System.out.printf("%-10s: %s\n", "Horario", horario);
-    System.out.printf("%-10s: %s\n", "Modalidad", presencial ? "Presencial" : "Distancia");
+  public void listarAulas() {
+    String format = "%-2s %-7s %-9s %-10s %-13s \n";
+
+    System.out.println("Aulas:");
+    System.out.printf(format, "n", "Nombre", "Edificio", "Capacidad", "Tipo");
+
+    for (int i = 0; i < cAulas; i++) {
+      Aula aula = aulas[i];
+
+      System.out.printf(
+          format,
+          i + 1 + "",
+          aula.getNombre(),
+          aula.getEdificio(),
+          aula.getCapacidad(),
+          aula.isAula() ? "Laboratorio" : "Aula");
+    }
+    System.out.println("");
   }
 
-  public void capturar (){
+  public void mostrar() {
+    String format = "%-10s: %s\n";
+
+    System.out.println("\nDatos del Curso: " + nombre);
+    System.out.printf(format, "  Clave", clave);
+    System.out.printf(format, "  Clase", nombre);
+    System.out.printf(format, "  Periodo", periodo);
+    System.out.printf(format, "  Horario", horario);
+    System.out.printf(format, "  Modalidad", presencial ? "Presencial" : "Distancia");
+    System.out.println("");
+  }
+
+  public void capturar() {
     Scanner sc = new Scanner(System.in);
 
     System.out.println("\nIngrese los datos del Curso");
-    
-    System.out.print("Clave: "); 
-    clave =  sc.nextLine();
+
+    System.out.print("Clave: ");
+    clave = sc.nextLine();
 
     System.out.print("Nombre: ");
     nombre = sc.nextLine();
 
-    System.out.print("Periodo: "); 
+    System.out.print("Periodo: ");
     periodo = sc.nextLine();
 
     System.out.print("Horario: ");
@@ -97,18 +142,19 @@ public class Curso {
     presencial = (sc.next() == "a") ? true : false;
   }
 
-  public boolean isEquals (String clave) {
+  public boolean isEquals(String clave) {
     return (this.clave == clave) ? true : false;
   }
 
-  public String toString () {
+  public String toString() {
     return nombre + "\n" + periodo;
   }
 
-  // Encapsulamiento  
+  // ENCAPSULAMIENTO
   public String getClave() {
     return clave;
   }
+
   public void setClave(String clave) {
     this.clave = clave;
   }
@@ -116,6 +162,7 @@ public class Curso {
   public String getNombre() {
     return nombre;
   }
+
   public void setNombre(String nombre) {
     this.nombre = nombre;
   }
@@ -123,6 +170,7 @@ public class Curso {
   public Boolean isPresencial() {
     return presencial;
   }
+
   public void setPresencial(Boolean presencial) {
     this.presencial = presencial;
   }
@@ -130,6 +178,7 @@ public class Curso {
   public String getPeriodo() {
     return periodo;
   }
+
   public void setPeriodo(String periodo) {
     this.periodo = periodo;
   }
@@ -137,6 +186,7 @@ public class Curso {
   public String getHorario() {
     return horario;
   }
+
   public void setHorario(String horario) {
     this.horario = horario;
   }

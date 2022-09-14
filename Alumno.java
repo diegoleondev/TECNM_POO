@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class Alumno {
-  // Atributos
   private String numeroControl;
   private String nombre;
   private String telefono;
@@ -22,17 +21,19 @@ public class Alumno {
     this.nombre = "Sin Nombre";
     this.telefono = "0000000000";
     this.carrera = "Sin Carrera";
-    this.genero = 'M';
+    this.genero = 'D';
   }
 
   // Loguica de la la clase
   public void mostrar() {
+    String format = "%s-10: %s";
+
     System.out.println("\nDatos del Alumno: " + nombre);
-    System.out.printf("%-11s: %s\n", "No. Control", numeroControl);
-    System.out.printf("%-11s: %s\n", "Nombre", nombre);
-    System.out.printf("%-11s: %s\n", "Telefono", telefono);
-    System.out.printf("%-11s: %s\n", "Carrera", carrera);
-    System.out.printf("%-11s: %s\n", "Genero", genero);
+    System.out.printf(format, "  No. Control", numeroControl);
+    System.out.printf(format, "  Nombre", nombre);
+    System.out.printf(format, "  Telefono", telefono);
+    System.out.printf(format, "  Carrera", carrera);
+    System.out.printf(format, "  Genero", genero);
   }
 
   public void capturar() {

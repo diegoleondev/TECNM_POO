@@ -1,10 +1,10 @@
 public class Escuela {
-  private String clave;
-  private Curso cursos[] = new Curso[500];
-  private String domicilio;
   private String nombre;
+  private String clave;
+  private String domicilio;
 
-  int cCursos;
+  private Curso cursos[] = new Curso[500];
+  private int cCursos;
 
   public Escuela(String clave, String domicilio, String nombre) {
     this.clave = clave;
@@ -15,45 +15,33 @@ public class Escuela {
   }
 
   private void inicializarDatos() {
-    Curso[] cursos = {
-        new Curso("B2L1A", "Programacion 2", true, "Ago-Dic 2022", "09:00"),
-        new Curso("B2L2A", "Calculo Integral", false, "Ago-Dic 2022", "10:00"),
-    };
 
-    Alumno[] alumnosA = {
-        new Alumno("22120601", "Antonio", "441 555 6666", "ISC", 'M'),
-        new Alumno("22120602", "Juan", "441 555 6666", "ISC", 'M'),
-        new Alumno("22120603", "Alexis", "441 555 6666", "ISC", 'M'),
-        new Alumno("22120604", "Maria", "441 555 6666", "ISC", 'F'),
-        new Alumno("22120605", "Pepe", "441 555 6666", "ISC", 'M'),
-        new Alumno("22120606", "Diego", "441 555 6666", "ISC", 'M'),
-        new Alumno("22120607", "Marco", "441 555 6666", "ISC", 'M'),
-        new Alumno("22120608", "Polo", "441 555 6666", "ISC", 'M'),
-        new Alumno("22120609", "Jose", "441 555 6666", "ISC", 'M'),
-        new Alumno("22120610", "Mario", "441 555 6666", "ISC", 'M'),
-    };
+    cursos[0] = new Curso("B2L1A", "POO", true, "Ago-Dic 2022", "09:00", "TECP2", "Programacion", "5", 5);
+    cursos[0].asignarPrefesor("martin@tecnm.com", "Desarollo Web", "Martin", "MART2000301", "443 111 5555");
+    cursos[0].agregarAulas(true, 30, "AG", "LC1");
+    cursos[0].agregarAulas(true, 25, "AG", "LC2");
+    cursos[0].agregarAlumno("22120601", "Antonio Gomez", "441 555 6666", "ISC", 'M');
+    cursos[0].agregarAlumno("22120602", "Juan Diaz", "441 555 6666", "ISC", 'M');
+    cursos[0].agregarAlumno("22120603", "Alexis Lora", "441 555 6666", "ISC", 'M');
 
-    Alumno[] alumnosB = {
-        new Alumno("22120611", "Alfredo", "441 555 6666", "ISC", 'M'),
-        new Alumno("22120612", "Ernesto", "441 555 6666", "ISC", 'M'),
-        new Alumno("22120613", "Adolfo", "441 555 6666", "ISC", 'M'),
-        new Alumno("22120614", "Jhosep", "441 555 6666", "ISC", 'M'),
-    };
-
-    this.cursos[0] = cursos[0];
-    this.cursos[0].agregarAlumnos(alumnosA);
-    this.cursos[1] = cursos[1];
-    this.cursos[1].agregarAlumnos(alumnosB);
+    cursos[1] = new Curso("B2L2A", "Calculo Integral", false, "Ago-Dic 2022", "10:00", "TECC2", "Programacion", "3", 5);
+    cursos[1].asignarPrefesor("omar@tecnm.com", "Matematicas", "Omar", "OMAR2300311", "443 555 222");
+    cursos[1].agregarAulas(false, 40, "F", "3");
+    cursos[1].agregarAlumno("22120604", "Alfredo Perez", "441 555 6666", "ISC", 'M');
+    cursos[1].agregarAlumno("22120605", "Ernesto Zedillo", "441 555 6666", "ISC", 'M');
+    cursos[1].agregarAlumno("22120606", "Adolfo Lopez", "441 555 6666", "ISC", 'M');
+    cursos[1].agregarAlumno("22120607", "Maria Nuñes", "441 555 6666", "ISC", 'F');
 
     cCursos = 2;
   }
 
-  // Loguica
-  public void listarCursos() {
-    String format = "%-6s %-6s %-20s %-13s %-8s %-10s\n";
+  // LOGICA DE LA CLASE
 
-    System.out.println("Cursos de la escuela: " + nombre);
-    System.out.printf(format, "Index", "Clave", "Nombre", "Periodo", "Horario", "Modalidad");
+  public void listarCursos() {
+    String format = "%-2s %-6s %-20s %-13s %-8s %-10s\n";
+
+    System.out.println("Cursos de " + nombre);
+    System.out.printf(format, "n", "Clave", "Nombre", "Periodo", "Horario", "Modalidad");
 
     for (int i = 0; i < cCursos; i++) {
       Curso curso = cursos[i];
@@ -72,21 +60,36 @@ public class Escuela {
     System.out.println("");
   }
 
-  // Encapsulamiento
+  public void listarDetalles(int curso) {
+    System.out.println("");
+    System.out.println("Detalles del curso: " + cursos[curso].getNombre());
+    System.out.println("");
+    cursos[curso].mostrarMateria();
+    cursos[curso].mostrarProfesor();
+    cursos[curso].listarAlumnos();
+    cursos[curso].listarAulas();
+  }
+
+  public void mostrar() {
+    String format = "%s-10: %s\n";
+
+    System.out.println("Esculea:");
+    System.out.printf(format, "  Nombre ", nombre);
+    System.out.printf(format, "  Clave ", clave);
+    System.out.printf(format, "  Domicilio ", domicilio);
+  }
+  // ENCAPSULAMIENTO
+
+  public String getNombre() {
+    return nombre;
+  }
+
   public String getClave() {
     return clave;
   }
 
-  public Curso[] getCursos() { // FALTA EL SET (?): Si para establecer (editar) las props.
-    return cursos;
-  }
-
   public String getDomicilio() {
     return domicilio;
-  }
-
-  public String getNombre() {
-    return nombre;
   }
 
   public void setClave(String clave) {
