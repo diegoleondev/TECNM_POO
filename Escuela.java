@@ -18,8 +18,8 @@ public class Escuela {
 
     cursos[0] = new Curso("B2L1A", "POO", true, "Ago-Dic 2022", "09:00", "AED-1287", "5", "3-2-5");
     cursos[0].asignarPrefesor("martin@tecnm.com", "Desarollo Web", "Martin", "MART2000301", "443 111 5555");
-    cursos[0].agregarAulas(true, 30, "AG", "LC1");
-    cursos[0].agregarAulas(true, 25, "AG", "LC2");
+    cursos[0].agregarAula(true, 30, "AG", "LC1");
+    cursos[0].agregarAula(true, 25, "AG", "LC2");
     cursos[0].agregarAlumno("22120601", "Antonio Gomez", "441 555 6666", "ISC", 'M');
     cursos[0].agregarAlumno("22120602", "Juan Diaz", "441 555 6666", "ISC", 'M');
     cursos[0].agregarAlumno("22120603", "Alexis Lora", "441 555 6666", "ISC", 'M');
@@ -27,7 +27,7 @@ public class Escuela {
     cursos[1] = new Curso("B2L2A", "Calculo Integral", false, "Ago-Dic 2022", "10:00", "TECC2", "3",
         "3-2-5");
     cursos[1].asignarPrefesor("omar@tecnm.com", "Matematicas", "Omar", "OMAR2300311", "443 555 222");
-    cursos[1].agregarAulas(false, 40, "F", "3");
+    cursos[1].agregarAula(false, 40, "F", "3");
     cursos[1].agregarAlumno("22120604", "Alfredo Perez", "441 555 6666", "ISC", 'M');
     cursos[1].agregarAlumno("22120605", "Ernesto Zedillo", "441 555 6666", "ISC", 'M');
     cursos[1].agregarAlumno("22120606", "Adolfo Lopez", "441 555 6666", "ISC", 'M');

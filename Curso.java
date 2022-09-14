@@ -54,7 +54,7 @@ public class Curso {
     profesor = new Profesor(correo, especializacion, nombre, rfc, telefono);
   }
 
-  public void agregarAulas(boolean aula, int capacidad, String edificio, String nombre) {
+  public void agregarAula(boolean aula, int capacidad, String edificio, String nombre) {
     aulas[cAulas++] = new Aula(aula, capacidad, edificio, nombre);
   }
 
