@@ -5,11 +5,46 @@ public class App {
     Scanner sc = new Scanner(System.in);
     Escuela escuela = new Escuela("16TIC", "Av. Tecnologuico #550", "Tecnologuico de Mexico");
 
-    escuela.listarCursos();
+    do {
+      switch (mostrarMenu()) {
+        case 11:
+          escuela.listarCursos();
+          break;
+        case 21:
+          escuela.listarAlumnos();
+          break;
+        case 31:
+          escuela.listarPorefesores();
+          break;
+        case 41:
+          escuela.listarAulas();
+          break;
+        case 51:
+          escuela.listarMaterias();
+          break;
+        default:
+          System.out.println("Opcion no valida");
+          break;
+      }
+    } while (true);
+  }
 
-    System.out.print("Seleccione un curso (n): ");
-    escuela.listarDetalles(sc.nextInt() - 1);
+  public static int mostrarMenu() {
+    Scanner sc = new Scanner(System.in);
 
-    sc.close();
+    System.out.println("\nMenu");
+    System.out.println("1) Cursos 2) Alumnos 3) Profesores 4) Aulas 5) Materias");
+    System.out.print("Seleccione una opcion: ");
+    int accion = sc.nextInt();
+
+    if (accion == 0)
+      return 0;
+
+    System.out.println("\n1) Mostrar 2) Agregar 3) Canselar");
+    System.out.print("Seleccione una opcion: ");
+    accion = accion * 10 + sc.nextInt();
+
+    System.out.println("\n");
+    return accion;
   }
 }

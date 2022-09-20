@@ -30,6 +30,16 @@ public class Curso {
     inicializarDatos();
   }
 
+  public Curso(String clave, String nombre, boolean presencial, String periodo, String horario, Materia materia) {
+    this.clave = clave;
+    this.nombre = nombre;
+    this.presencial = presencial;
+    this.periodo = periodo;
+    this.horario = horario;
+
+    materia = new Materia(materia.getClave(), materia.getNombre(), materia.getUnidades(), materia.getClave());
+  }
+
   public Curso() {
     this.clave = "";
     this.nombre = "";
@@ -50,12 +60,27 @@ public class Curso {
     alumnos[cAlumnos++] = new Alumno(numeroControl, nombre, telefono, carrera, genero);
   }
 
+  public void agregarAlumno(Alumno alumno) {
+    alumnos[cAlumnos++] = new Alumno(alumno.getNumeroControl(), alumno.getNombre(), alumno.getTelefono(),
+        alumno.getCarrera(), alumno.getGenero());
+
+  }
+
   public void asignarPrefesor(String correo, String especializacion, String nombre, String rfc, String telefono) {
     profesor = new Profesor(correo, especializacion, nombre, rfc, telefono);
   }
 
+  public void asignarPrefesor(Profesor profesor) {
+    this.profesor = new Profesor(profesor.getCorreo(), profesor.getEspecializacion(), profesor.getNombre(),
+        profesor.getRfc(), profesor.getTelefono());
+  }
+
   public void agregarAula(boolean aula, int capacidad, String edificio, String nombre) {
     aulas[cAulas++] = new Aula(aula, capacidad, edificio, nombre);
+  }
+
+  public void agregarAula(Aula aula) {
+    aulas[cAulas++] = new Aula(aula.isAula(), aula.getCapacidad(), aula.getEdificio(), aula.getNombre());
   }
 
   public void mostrarProfesor() {
