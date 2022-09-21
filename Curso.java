@@ -56,6 +56,11 @@ public class Curso {
   }
 
   // LOGICA DE LA CLASE
+
+  public void asignarCalificacion(int nAlumno, int calificacion) {
+    alumnos[nAlumno].setCalificacion(calificacion);
+  }
+
   public void agregarAlumno(String numeroControl, String nombre, String telefono, String carrera, char genero) {
     alumnos[cAlumnos++] = new Alumno(numeroControl, nombre, telefono, carrera, genero);
   }
@@ -94,10 +99,10 @@ public class Curso {
   }
 
   public void listarAlumnos() {
-    String format = "%-2s %-20s %-13s %-8s %-7s %-11s\n";
+    String format = "%-2s %-20s %-13s %-8s %-7s %-11s %-12s\n";
 
     System.out.println("Alumnos:");
-    System.out.printf(format, "n", "Nombre", "No. Control", "Carrera", "Genero", "Telefono");
+    System.out.printf(format, "n", "Nombre", "No. Control", "Carrera", "Genero", "Telefono", "calificacion");
 
     for (int i = 0; i < cAlumnos; i++) {
       Alumno alumno = alumnos[i];
@@ -109,7 +114,8 @@ public class Curso {
           alumno.getNumeroControl(),
           alumno.getCarrera(),
           alumno.getGenero(),
-          alumno.getTelefono());
+          alumno.getTelefono(),
+          alumno.getCalificacion());
     }
     System.out.println("");
   }

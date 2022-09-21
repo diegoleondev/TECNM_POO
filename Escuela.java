@@ -59,15 +59,15 @@ public class Escuela {
     cAulas = 3;
 
     // DB - Alumnos
-    alumnos[0] = new Alumno("22120601", "Antonio Gomez", "441 555 6666", "ISC", 'M');
-    alumnos[1] = new Alumno("22120602", "Juan Diaz", "441 555 6666", "ISC", 'M');
-    alumnos[2] = new Alumno("22120603", "Alexis Lora", "441 555 6666", "ISC", 'M');
-    alumnos[3] = new Alumno("22120604", "Alfredo Perez", "441 555 6666", "ISC", 'M');
-    alumnos[4] = new Alumno("22120605", "Ernesto Zedillo", "441 555 6666", "ISC", 'M');
-    alumnos[5] = new Alumno("22120606", "Adolfo Lopez", "441 555 6666", "ISC", 'M');
-    alumnos[6] = new Alumno("22120607", "Maria Nuñes", "441 555 6666", "ISC", 'F');
-    alumnos[7] = new Alumno("22120608", "Luis Mau", "443 111 4557", "ISC", 'M');
-    alumnos[8] = new Alumno("22120609", "Luis Alberto", "443 222 4557", "ISC", 'M');
+    alumnos[0] = new Alumno("22120601", "Antonio Gomez", "441 555 6666", "ISC", 'M', 10);
+    alumnos[1] = new Alumno("22120602", "Juan Diaz", "441 555 6666", "ISC", 'M', 10);
+    alumnos[2] = new Alumno("22120603", "Alexis Lora", "441 555 6666", "ISC", 'M', 10);
+    alumnos[3] = new Alumno("22120604", "Alfredo Perez", "441 555 6666", "ISC", 'M', 10);
+    alumnos[4] = new Alumno("22120605", "Ernesto Zedillo", "441 555 6666", "ISC", 'M', 10);
+    alumnos[5] = new Alumno("22120606", "Adolfo Lopez", "441 555 6666", "ISC", 'M', 10);
+    alumnos[6] = new Alumno("22120607", "Maria Nuñes", "441 555 6666", "ISC", 'F', 10);
+    alumnos[7] = new Alumno("22120608", "Luis Mau", "443 111 4557", "ISC", 'M', 10);
+    alumnos[8] = new Alumno("22120609", "Luis Alberto", "443 222 4557", "ISC", 'M', 10);
 
     cAlumnos = 8;
 
@@ -85,12 +85,23 @@ public class Escuela {
     cursos[0].agregarAlumno(alumnos[0]);
     cursos[0].agregarAlumno(alumnos[1]);
     cursos[0].agregarAlumno(alumnos[2]);
-    cursos[1].agregarAlumno(alumnos[3]);
-    cursos[1].agregarAlumno(alumnos[4]);
-    cursos[1].agregarAlumno(alumnos[5]);
-    cursos[2].agregarAlumno(alumnos[6]);
-    cursos[2].agregarAlumno(alumnos[7]);
-    cursos[2].agregarAlumno(alumnos[8]);
+    cursos[1].agregarAlumno(alumnos[0]);
+    cursos[1].agregarAlumno(alumnos[1]);
+    cursos[1].agregarAlumno(alumnos[2]);
+    cursos[2].agregarAlumno(alumnos[0]);
+    cursos[2].agregarAlumno(alumnos[1]);
+    cursos[2].agregarAlumno(alumnos[2]);
+
+    /* Calificaciones */
+    cursos[0].asignarCalificacion(0, 6);
+    cursos[0].asignarCalificacion(1, 7);
+    cursos[0].asignarCalificacion(2, 8);
+    cursos[1].asignarCalificacion(0, 9);
+    cursos[1].asignarCalificacion(1, 6);
+    cursos[1].asignarCalificacion(2, 6);
+    cursos[2].asignarCalificacion(0, 8);
+    cursos[2].asignarCalificacion(1, 5);
+    cursos[2].asignarCalificacion(2, 4);
   }
 
   // LOGICA DE LA CLASE
@@ -113,9 +124,12 @@ public class Escuela {
           curso.getHorario(),
           curso.isPresencial() ? "Presencial" : "Distancia");
 
+      curso.listarAlumnos();
+
     }
 
     System.out.println("");
+
   }
 
   public void listarPorefesores() {
@@ -156,9 +170,9 @@ public class Escuela {
   }
 
   public void listarAlumnos() {
-    String format = "%-2s %-12s %-20s %-10s %-5s %-11s\n";
+    String format = "%-2s %-12s %-20s %-10s %-5s %-11s %-14s\n";
     System.out.println("Alumnos de " + nombre);
-    System.out.printf(format, "n", "No. Control", "Nombre", "Carrera", "Sexo", "Telefono");
+    System.out.printf(format, "n", "No. Control", "Nombre", "Carrera", "Sexo", "Telefono", "Calificacion");
 
     for (int i = 0; i < cAlumnos; i++) {
       Alumno alumno = alumnos[i];
@@ -170,7 +184,8 @@ public class Escuela {
           alumno.getNombre(),
           alumno.getCarrera(),
           alumno.getGenero(),
-          alumno.getTelefono());
+          alumno.getTelefono(),
+          alumno.getCalificacion() + "");
     }
   }
 

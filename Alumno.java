@@ -5,6 +5,7 @@ public class Alumno {
   private String nombre;
   private String telefono;
   private String carrera;
+  private int calificacion;
   private char genero;
 
   // Constructores
@@ -14,6 +15,17 @@ public class Alumno {
     this.telefono = telefono;
     this.carrera = carrera;
     this.genero = genero;
+    this.calificacion = 0;
+
+  }
+
+  public Alumno(String numeroControl, String nombre, String telefono, String carrera, char genero, int calificacion) {
+    this.numeroControl = numeroControl;
+    this.nombre = nombre;
+    this.telefono = telefono;
+    this.carrera = carrera;
+    this.genero = genero;
+    this.calificacion = calificacion;
   }
 
   public Alumno() {
@@ -22,6 +34,7 @@ public class Alumno {
     this.telefono = "0000000000";
     this.carrera = "Sin Carrera";
     this.genero = 'D';
+    this.calificacion = 0;
   }
 
   // Loguica de la la clase
@@ -34,6 +47,7 @@ public class Alumno {
     System.out.printf(format, "  Telefono", telefono);
     System.out.printf(format, "  Carrera", carrera);
     System.out.printf(format, "  Genero", genero);
+    System.out.printf(format, "  Genero", calificacion);
   }
 
   public void capturar() {
@@ -55,6 +69,10 @@ public class Alumno {
 
     System.out.print("Genero: ");
     genero = sc.nextLine().charAt(0);
+
+    System.out.print("Genero: ");
+    calificacion = sc.nextInt();
+
   }
 
   public boolean isEquals(String numeroControl) {
@@ -106,5 +124,13 @@ public class Alumno {
 
   public void setGenero(char genero) {
     this.genero = genero;
+  }
+
+  public void setCalificacion(int calificacion) {
+    this.calificacion = calificacion;
+  }
+
+  public int getCalificacion() {
+    return calificacion;
   }
 }
