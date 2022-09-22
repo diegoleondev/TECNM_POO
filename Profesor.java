@@ -57,7 +57,7 @@ public class Profesor {
     telefono = scanner.nextLine();
   }
 
-  public boolean isEquals(String rfc) {
+  public boolean equals(String rfc) {
     return (this.rfc == rfc) ? true : false;
   }
 

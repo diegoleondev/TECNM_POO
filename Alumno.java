@@ -75,7 +75,7 @@ public class Alumno {
 
   }
 
-  public boolean isEquals(String numeroControl) {
+  public boolean equals(String numeroControl) {
     if (this.numeroControl == numeroControl)
       return true;
     return false;

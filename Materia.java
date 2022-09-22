@@ -50,7 +50,7 @@ public class Materia {
     satca = scanner.nextLine();
   }
 
-  public boolean isEquals(String clave) {
+  public boolean equals(String clave) {
     return (this.clave == clave) ? true : false;
   }
 

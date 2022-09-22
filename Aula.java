@@ -50,7 +50,7 @@ public class Aula {
     aula = (sc.next().charAt(0) == 'a') ? true : false;
   }
 
-  public boolean isEquals(String nombre, String edificio) {
+  public boolean equals(String nombre, String edificio) {
     return (this.nombre == nombre && this.edificio == edificio) ? true : false;
   }
 
