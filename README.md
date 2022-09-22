@@ -1,6 +1,6 @@
 # ¿Cómo descargar? 🤔
 
-![image](image.jpeg)
+![image](https://i.ibb.co/jW206DY/descargar.jpg)
 
 1. Haga clic en `code`
 2. Haga clic en `Download ZIP`
@@ -35,7 +35,7 @@ Como paso opcional puede dar una `⭐` al pryecto, Me motiva a seguir compartien
 
 # Diagrama de Clases UML
 
-![dia](dia.jpg)
+![dia](https://i.ibb.co/sCsd1QB/dia.jpg)
 
 [Descarge el Diagrama UML](https://drive.google.com/drive/folders/10KvX6fDKpHoVUQBwmwifrnxlMwg537Ga?usp=sharing). Puedes ver el siguiente video didáctico que explica con más detalle qué es un diagrama de clases UML "[Tutorial - Diagrama de Clases UML](https://youtu.be/Z0yLerU0g-Q)"
 
