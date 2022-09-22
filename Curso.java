@@ -56,6 +56,19 @@ public class Curso {
   }
 
   // LOGICA DE LA CLASE
+  // Sobre Carga
+  public void asignarCalificacion(String numeroControl, int calificacion) {
+    for (int i = 0; i < cAlumnos; i++) {
+      Alumno alumno = alumnos[i];
+
+      boolean equals = alumno.equals(numeroControl);
+
+      if (equals) {
+        alumno.setCalificacion(calificacion);
+        break;
+      }
+    }
+  }
 
   public void asignarCalificacion(int nAlumno, int calificacion) {
     alumnos[nAlumno].setCalificacion(calificacion);

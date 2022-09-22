@@ -93,15 +93,16 @@ public class Escuela {
     cursos[2].agregarAlumno(alumnos[2]);
 
     /* Calificaciones */
-    cursos[0].asignarCalificacion(0, 6);
-    cursos[0].asignarCalificacion(1, 7);
-    cursos[0].asignarCalificacion(2, 8);
-    cursos[1].asignarCalificacion(0, 9);
-    cursos[1].asignarCalificacion(1, 6);
-    cursos[1].asignarCalificacion(2, 6);
-    cursos[2].asignarCalificacion(0, 8);
-    cursos[2].asignarCalificacion(1, 5);
-    cursos[2].asignarCalificacion(2, 4);
+    cursos[0].asignarCalificacion(0, 60);
+    cursos[0].asignarCalificacion(1, 65);
+    cursos[0].asignarCalificacion(2, 70);
+    cursos[1].asignarCalificacion("22120601", 80);
+    cursos[1].asignarCalificacion("22120602", 85);
+    cursos[1].asignarCalificacion("22120603", 90);
+    cursos[2].asignarCalificacion("22120601", 90);
+    cursos[2].asignarCalificacion("22120602", 95);
+    cursos[2].asignarCalificacion("22120603", 100);
+
   }
 
   // LOGICA DE LA CLASE
