@@ -57,6 +57,19 @@ public class Curso {
 
   // LOGICA DE LA CLASE
   // Sobre Carga
+
+  public void mostrarPromedio() {
+    int sumatoria = 0;
+
+    for (int i = 0; i < cAlumnos; i++) {
+      sumatoria += alumnos[i].getCalificacion();
+    }
+
+    int promedio = sumatoria / cAlumnos;
+
+    System.out.println("Promedio del Curso: " + promedio + "\n");
+  }
+
   public void asignarCalificacion(String numeroControl, int calificacion) {
     for (int i = 0; i < cAlumnos; i++) {
       Alumno alumno = alumnos[i];

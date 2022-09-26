@@ -37,7 +37,6 @@ public class Alumno {
     this.calificacion = 0;
   }
 
-  // Loguica de la la clase
   public void mostrar() {
     String format = "%s-10: %s";
 

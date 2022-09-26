@@ -126,7 +126,7 @@ public class Escuela {
           curso.isPresencial() ? "Presencial" : "Distancia");
 
       curso.listarAlumnos();
-
+      curso.mostrarPromedio();
     }
 
     System.out.println("");
@@ -171,10 +171,11 @@ public class Escuela {
   }
 
   public void listarAlumnos() {
-    String format = "%-2s %-12s %-20s %-10s %-5s %-11s %-14s\n";
+    String format = "%-2s %-12s %-15s %-10s %-5s %-11s %-13s\n";
     System.out.println("Alumnos de " + nombre);
     System.out.printf(format, "n", "No. Control", "Nombre", "Carrera", "Sexo", "Telefono", "Calificacion");
 
+    // Promedio
     for (int i = 0; i < cAlumnos; i++) {
       Alumno alumno = alumnos[i];
 
