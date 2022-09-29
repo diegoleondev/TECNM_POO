@@ -1,39 +1,30 @@
 import java.util.Scanner;
 
-public class Alumno {
+public class Alumno extends Persona {
   private String numeroControl;
-  private String nombre;
-  private String telefono;
   private String carrera;
   private int calificacion;
   private char genero;
 
   // Constructores
-  public Alumno(String numeroControl, String nombre, String telefono, String carrera, char genero) {
+  public Alumno(String nombre, String numeroControl,
+      String telefono, String correo, String carrera, char genero) {
+    super(nombre, telefono, correo);
     this.numeroControl = numeroControl;
-    this.nombre = nombre;
-    this.telefono = telefono;
     this.carrera = carrera;
     this.genero = genero;
-    this.calificacion = 0;
 
-  }
-
-  public Alumno(String numeroControl, String nombre, String telefono, String carrera, char genero, int calificacion) {
-    this.numeroControl = numeroControl;
-    this.nombre = nombre;
-    this.telefono = telefono;
-    this.carrera = carrera;
-    this.genero = genero;
-    this.calificacion = calificacion;
+    System.out.println(numeroControl);
+    inicialisaDatos();
   }
 
   public Alumno() {
-    this.numeroControl = "00000000";
-    this.nombre = "Sin Nombre";
-    this.telefono = "0000000000";
-    this.carrera = "Sin Carrera";
-    this.genero = 'D';
+    capturar();
+
+    inicialisaDatos();
+  }
+
+  private void inicialisaDatos() {
     this.calificacion = 0;
   }
 
@@ -41,9 +32,8 @@ public class Alumno {
     String format = "%s-10: %s";
 
     System.out.println("\nDatos del Alumno: " + nombre);
+    super.mostrar(format);
     System.out.printf(format, "  No. Control", numeroControl);
-    System.out.printf(format, "  Nombre", nombre);
-    System.out.printf(format, "  Telefono", telefono);
     System.out.printf(format, "  Carrera", carrera);
     System.out.printf(format, "  Genero", genero);
     System.out.printf(format, "  Genero", calificacion);
@@ -75,9 +65,7 @@ public class Alumno {
   }
 
   public boolean equals(String numeroControl) {
-    if (this.numeroControl == numeroControl)
-      return true;
-    return false;
+    return (this.numeroControl == numeroControl) ? true : false;
   }
 
   public String toString() {

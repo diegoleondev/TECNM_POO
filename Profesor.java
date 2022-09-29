@@ -1,37 +1,27 @@
 import java.util.Scanner;
 
-public class Profesor {
+public class Profesor extends Persona {
   // Atributos
-  private String correo;
   private String especializacion;
-  private String nombre;
   private String rfc;
-  private String telefono;
 
   // Constructores
   public Profesor(String correo, String especializacion, String nombre, String rfc, String telefono) {
-    this.correo = correo;
+    super(nombre, telefono, correo);
     this.especializacion = especializacion;
-    this.nombre = nombre;
     this.rfc = rfc;
-    this.telefono = telefono;
   }
 
   public Profesor() {
-    this.correo = "";
-    this.especializacion = "";
-    this.nombre = "";
-    this.rfc = "";
-    this.telefono = "";
+    capturar();
   }
 
   // Logica de la clase
+  // @Override
   public void mostrar() {
     String format = "%-16s: %s\n";
-    System.out.println("Profesor:");
-    System.out.printf(format, "  Nombre", nombre);
-    System.out.printf(format, "  Correo", correo);
-    System.out.printf(format, "  Especializacion", especializacion);
+    System.out.println("---- Profesor ----");
+    super.mostrar(format);
     System.out.printf(format, "  RFC", rfc);
     System.out.printf(format, "  Telefono", telefono);
   }
@@ -66,28 +56,12 @@ public class Profesor {
   }
 
   // Encapsulamiento
-  public String getCorreo() {
-    return correo;
-  }
-
-  public void setCorreo(String correo) {
-    this.correo = correo;
-  }
-
   public String getEspecializacion() {
     return especializacion;
   }
 
   public void setEspecializacion(String especializacion) {
     this.especializacion = especializacion;
-  }
-
-  public String getNombre() {
-    return nombre;
-  }
-
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
   }
 
   public String getRfc() {
@@ -98,11 +72,4 @@ public class Profesor {
     this.rfc = rfc;
   }
 
-  public String getTelefono() {
-    return telefono;
-  }
-
-  public void setTelefono(String telefono) {
-    this.telefono = telefono;
-  }
 }

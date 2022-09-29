@@ -52,24 +52,18 @@ public class Escuela {
 
     // DB - Aulas
     aulas[0] = new Aula(true, 30, "AG", "LC1");
-    aulas[0] = new Aula(true, 25, "AG", "LC2");
-    aulas[1] = new Aula(false, 40, "F", "3");
-    aulas[2] = new Aula(false, 32, "K", "8");
+    aulas[1] = new Aula(true, 25, "AG", "LC2");
+    aulas[2] = new Aula(false, 40, "F", "3");
+    aulas[3] = new Aula(false, 32, "K", "8");
 
-    cAulas = 3;
+    cAulas = 4;
 
     // DB - Alumnos
-    alumnos[0] = new Alumno("22120601", "Antonio Gomez", "441 555 6666", "ISC", 'M', 10);
-    alumnos[1] = new Alumno("22120602", "Juan Diaz", "441 555 6666", "ISC", 'M', 10);
-    alumnos[2] = new Alumno("22120603", "Alexis Lora", "441 555 6666", "ISC", 'M', 10);
-    alumnos[3] = new Alumno("22120604", "Alfredo Perez", "441 555 6666", "ISC", 'M', 10);
-    alumnos[4] = new Alumno("22120605", "Ernesto Zedillo", "441 555 6666", "ISC", 'M', 10);
-    alumnos[5] = new Alumno("22120606", "Adolfo Lopez", "441 555 6666", "ISC", 'M', 10);
-    alumnos[6] = new Alumno("22120607", "Maria Nuñes", "441 555 6666", "ISC", 'F', 10);
-    alumnos[7] = new Alumno("22120608", "Luis Mau", "443 111 4557", "ISC", 'M', 10);
-    alumnos[8] = new Alumno("22120609", "Luis Alberto", "443 222 4557", "ISC", 'M', 10);
+    alumnos[0] = new Alumno("Antonio Gomez", "22120601", "441 555 6666", "antonio@email.com", "ISC", 'M');
+    alumnos[1] = new Alumno("Juan Diaz", "22120602", "441 555 6666", "juan@email.com", "ISC", 'M');
+    alumnos[2] = new Alumno("Alexis Lora", "22120603", "441 555 6666", "alexis@email.com", "ISC", 'M');
 
-    cAlumnos = 8;
+    cAlumnos = 3;
 
     // Asignaciones
 
@@ -171,6 +165,11 @@ public class Escuela {
   }
 
   public void listarAlumnos() {
+    if (cAlumnos == 0) {
+      System.out.println("No hay alumnos registrados");
+      return;
+    }
+
     String format = "%-2s %-12s %-15s %-10s %-5s %-11s %-13s\n";
     System.out.println("Alumnos de " + nombre);
     System.out.printf(format, "n", "No. Control", "Nombre", "Carrera", "Sexo", "Telefono", "Calificacion");
@@ -226,6 +225,14 @@ public class Escuela {
     System.out.printf(format, "  Nombre ", nombre);
     System.out.printf(format, "  Clave ", clave);
     System.out.printf(format, "  Domicilio ", domicilio);
+  }
+
+  public void capturarProfesor() {
+    profesores[cPorefesores++] = new Profesor();
+  }
+
+  public void capturarCurso() {
+    cursos[cCursos++] = new Curso();
   }
   // ENCAPSULAMIENTO
 

@@ -41,13 +41,8 @@ public class Curso {
   }
 
   public Curso() {
-    this.clave = "";
-    this.nombre = "";
-    this.presencial = false;
-    this.periodo = "";
-    this.horario = "";
-
     inicializarDatos();
+    capturar();
   }
 
   private void inicializarDatos() {
@@ -59,6 +54,9 @@ public class Curso {
   // Sobre Carga
 
   public void mostrarPromedio() {
+    if (cAlumnos == 0)
+      return;
+
     int sumatoria = 0;
 
     for (int i = 0; i < cAlumnos; i++) {
@@ -74,9 +72,11 @@ public class Curso {
     for (int i = 0; i < cAlumnos; i++) {
       Alumno alumno = alumnos[i];
 
-      boolean equals = alumno.equals(numeroControl);
+      boolean isEquals = alumno.equals(numeroControl);
 
-      if (equals) {
+      System.out.println(isEquals + alumno.getNumeroControl() + numeroControl);
+
+      if (isEquals) {
         alumno.setCalificacion(calificacion);
         break;
       }
@@ -87,13 +87,19 @@ public class Curso {
     alumnos[nAlumno].setCalificacion(calificacion);
   }
 
-  public void agregarAlumno(String numeroControl, String nombre, String telefono, String carrera, char genero) {
-    alumnos[cAlumnos++] = new Alumno(numeroControl, nombre, telefono, carrera, genero);
+  public void agregarAlumno(String numeroControl, String nombre, String telefono, String correo, String carrera,
+      char genero) {
+    alumnos[cAlumnos++] = new Alumno(numeroControl, nombre, telefono, correo, carrera, genero);
   }
 
   public void agregarAlumno(Alumno alumno) {
-    alumnos[cAlumnos++] = new Alumno(alumno.getNumeroControl(), alumno.getNombre(), alumno.getTelefono(),
-        alumno.getCarrera(), alumno.getGenero());
+    alumnos[cAlumnos++] = new Alumno(
+        alumno.getNombre(),
+        alumno.getNumeroControl(),
+        alumno.getTelefono(),
+        alumno.getCorreo(),
+        alumno.getCarrera(),
+        alumno.getGenero());
 
   }
 
@@ -125,6 +131,11 @@ public class Curso {
   }
 
   public void listarAlumnos() {
+    if (cAlumnos == 0) {
+      System.out.println("No hay alumnos registrados");
+      return;
+    }
+
     String format = "%-2s %-20s %-13s %-8s %-7s %-11s %-12s\n";
 
     System.out.println("Alumnos:");
@@ -199,7 +210,7 @@ public class Curso {
     presencial = (sc.next() == "a") ? true : false;
   }
 
-  public boolean isEquals(String clave) {
+  public boolean equals(String clave) {
     return (this.clave == clave) ? true : false;
   }
 

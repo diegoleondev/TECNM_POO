@@ -14,11 +14,17 @@ public class App {
         case 11:
           escuela.listarCursos();
           break;
+        case 12:
+          escuela.capturarCurso();
+        break;
         case 21:
           escuela.listarAlumnos();
           break;
         case 31:
           escuela.listarPorefesores();
+          break;
+        case 32:
+          escuela.capturarProfesor();
           break;
         case 41:
           escuela.listarAulas();
@@ -26,7 +32,6 @@ public class App {
         case 51:
           escuela.listarMaterias();
           break;
-
         default:
           System.out.println("Opcion no valida");
           break;
