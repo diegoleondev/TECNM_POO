@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Escuela {
   private String nombre;
   private String clave;
@@ -37,9 +39,9 @@ public class Escuela {
     cMaterias = 3;
 
     // DB - Cursos
-    cursos[0] = new Curso("B2L1A", "POO", true, "Ago-Dic 2022", "09:00", materias[0]);
-    cursos[1] = new Curso("B2L2A", "Calculo Integral", false, "Ago-Dic", "8:00", materias[1]);
-    cursos[2] = new Curso("B2L3A", "Algebra Lineal", false, "Ago-Dic 2022", "10:00", materias[2]);
+    cursos[0] = new Curso("B2L1A", true, "Ago-Dic 2022", "09:00", materias[0]);
+    cursos[1] = new Curso("B2L2A", false, "Ago-Dic 2022", "08:00", materias[1]);
+    cursos[2] = new Curso("B2L3A", false, "Ago-Dic 2022", "10:00", materias[2]);
 
     cCursos = 3;
 
@@ -232,7 +234,12 @@ public class Escuela {
   }
 
   public void capturarCurso() {
-    cursos[cCursos++] = new Curso();
+    Scanner sc = new Scanner(System.in);
+    listarMaterias();
+
+    System.out.print("Seleccione una Materia:");
+
+    cursos[cCursos++] = new Curso(materias[sc.nextInt() - 1]);
   }
 
   public void capturarAlumno() {

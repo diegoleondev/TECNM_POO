@@ -16,6 +16,10 @@ public class Curso {
   private int cAlumnos;
   private int cAulas;
 
+  /*
+   * 
+   * Pasarle meteria al constructor
+   */
   // CONSTRUCTORES
   public Curso(String clave, String nombre, boolean presencial, String periodo, String horario, String claveMateria,
       String unidades, String satca) {
@@ -30,9 +34,9 @@ public class Curso {
     inicializarDatos();
   }
 
-  public Curso(String clave, String nombre, boolean presencial, String periodo, String horario, Materia materia) {
+  public Curso(String clave, boolean presencial, String periodo, String horario, Materia materia) {
     this.clave = clave;
-    this.nombre = nombre;
+    this.nombre = materia.getNombre();
     this.presencial = presencial;
     this.periodo = periodo;
     this.horario = horario;
@@ -40,8 +44,9 @@ public class Curso {
     materia = new Materia(materia.getClave(), materia.getNombre(), materia.getUnidades(), materia.getClave());
   }
 
-  public Curso() {
+  public Curso(Materia materia) {
     inicializarDatos();
+    this.nombre = materia.getNombre();
     capturar();
   }
 
@@ -130,7 +135,7 @@ public class Curso {
 
   public void listarAlumnos() {
     if (cAlumnos == 0) {
-      System.out.println("No hay alumnos registrados");
+      System.out.println("No hay alumnos registrados. \n");
       return;
     }
 
@@ -194,9 +199,6 @@ public class Curso {
 
     System.out.print("Clave: ");
     clave = sc.nextLine();
-
-    System.out.print("Nombre: ");
-    nombre = sc.nextLine();
 
     System.out.print("Periodo: ");
     periodo = sc.nextLine();
