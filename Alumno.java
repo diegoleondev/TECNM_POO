@@ -14,7 +14,6 @@ public class Alumno extends Persona {
     this.carrera = carrera;
     this.genero = genero;
 
-    System.out.println(numeroControl);
     inicialisaDatos();
   }
 

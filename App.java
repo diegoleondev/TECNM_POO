@@ -5,10 +5,6 @@ public class App {
     Scanner sc = new Scanner(System.in);
     Escuela escuela = new Escuela("16TIC", "Av. Tecnologuico #550", "Tecnologuico de Mexico");
 
-    /*
-     * Promedio de todas las materias
-     * Promedio de
-     */
     do {
       switch (mostrarMenu()) {
         case 11:
@@ -16,9 +12,12 @@ public class App {
           break;
         case 12:
           escuela.capturarCurso();
-        break;
+          break;
         case 21:
           escuela.listarAlumnos();
+          break;
+        case 22:
+          escuela.capturarAlumno();
           break;
         case 31:
           escuela.listarPorefesores();
@@ -29,8 +28,14 @@ public class App {
         case 41:
           escuela.listarAulas();
           break;
+        case 42:
+          escuela.capturarAula();
+          break;
         case 51:
           escuela.listarMaterias();
+          break;
+        case 52:
+          escuela.capturarMateria();
           break;
         default:
           System.out.println("Opcion no valida");

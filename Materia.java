@@ -15,10 +15,7 @@ public class Materia {
   }
 
   public Materia() {
-    this.clave = "";
-    this.nombre = "";
-    this.unidades = "";
-    this.satca = "0-0-0";
+    capturar();
   }
 
   // LOGICA DE LA CLASE

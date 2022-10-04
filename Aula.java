@@ -15,10 +15,7 @@ public class Aula {
   }
 
   public Aula() {
-    this.aula = false;
-    this.capacidad = 0;
-    this.edificio = "";
-    this.nombre = "";
+    capturar();
   }
 
   // Logica de la clase

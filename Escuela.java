@@ -234,6 +234,18 @@ public class Escuela {
   public void capturarCurso() {
     cursos[cCursos++] = new Curso();
   }
+
+  public void capturarAlumno() {
+    alumnos[cAlumnos++] = new Alumno();
+  }
+
+  public void capturarAula() {
+    aulas[cAulas++] = new Aula();
+  }
+
+  public void capturarMateria() {
+    materias[cMaterias++] = new Materia();
+  }
   // ENCAPSULAMIENTO
 
   public String getNombre() {

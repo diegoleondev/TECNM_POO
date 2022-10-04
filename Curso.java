@@ -74,8 +74,6 @@ public class Curso {
 
       boolean isEquals = alumno.equals(numeroControl);
 
-      System.out.println(isEquals + alumno.getNumeroControl() + numeroControl);
-
       if (isEquals) {
         alumno.setCalificacion(calificacion);
         break;
