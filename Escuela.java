@@ -106,9 +106,9 @@ public class Escuela {
   public void listarCursos() {
     String format = "| %-1s | %-5s | %-25s | %-12s | %-7s | %-11s |\n";
     String format2 = "| %-37s | %-36s |\n";
-  String format3 = "| %-17s | %-17s | %-17s | %-16s |\n";
-  String format4 = "| %-1s | %-11s | %-51s | %-4s |\n";
-  
+    String format3 = "| %-17s | %-17s | %-17s | %-16s |\n";
+    String format4 = "| %-1s | %-11s | %-51s | %-4s |\n";
+
     String separador = "--------------------------------------";// -2
 
     System.out.println("Cursos de " + nombre);
@@ -117,8 +117,8 @@ public class Escuela {
       Curso curso = cursos[i];
       Profesor profesor = curso.getProfesor();
       Materia materia = curso.getMateria();
-	  Aula[] aulas = curso.getAulas();
-	  Alumno[] alumnos = curso.getAlumnos();
+      Aula[] aulas = curso.getAulas();
+      Alumno[] alumnos = curso.getAlumnos();
 
       System.out.println("________________________________________________________________________________");
       System.out.printf(format, "n", "Clave", "Nombre", "Periodo", "Horario", "Modalidad");
@@ -144,32 +144,30 @@ public class Escuela {
       System.out.printf(
           format2, "Correo  : " + profesor.getCorreo(), "Unidades: " +
               materia.getUnidades());
-	System.out.println("|------------------------------------ Aulas -----------------------------------|");
-	
-		System.out.printf(format3, "Nombre", "Edificio", "Capacidad", "Aula");
-		for(int j = 0; j < aulas.length; j++){
-			Aula aula = aulas[j];
-			
-			if (aula == null) break;
-			
-			System.out.printf(format3, aula.getNombre(), aula.getEdificio(), aula.getCapacidad(), aula.isAula() ? "Aula" : "Laboratorio");
-		}
-		System.out.println("|----------------------------------- Alumnos ----------------------------------|");
-		System.out.printf(format4,"n", "No. Control", "Nombre", "Cali");
-		for(int j = 0; j < alumnos.length; j++){
-			Alumno alumno = alumnos[j];
-			
-			if (alumno == null) break;
-			
-			System.out.printf(format4, j + 1, alumno.getNumeroControl(), alumno.getNombre(), alumno.getCalificacion());
-		}
-		System.out.println("--------------------------------------------------------------------------------");
-		System.out.printf("| %-18s: %-4s |\n", "Promedio del Grupo", curso.calcularPromedio());
-		System.out.println("----------------------------\n");
-      /*
-       * curso.listarAlumnos();
-       * curso.mostrarPromedio();
-       */
+      System.out.println("|------------------------------------ Aulas -----------------------------------|");
+      System.out.printf(format3, "Nombre", "Edificio", "Capacidad", "Aula");
+      for (int j = 0; j < aulas.length; j++) {
+        Aula aula = aulas[j];
+
+        if (aula == null)
+          break;
+
+        System.out.printf(format3, aula.getNombre(), aula.getEdificio(), aula.getCapacidad(),
+            aula.isAula() ? "Aula" : "Laboratorio");
+      }
+      System.out.println("|----------------------------------- Alumnos ----------------------------------|");
+      System.out.printf(format4, "n", "No. Control", "Nombre", "Cali");
+      for (int j = 0; j < alumnos.length; j++) {
+        Alumno alumno = alumnos[j];
+
+        if (alumno == null)
+          break;
+
+        System.out.printf(format4, j + 1, alumno.getNumeroControl(), alumno.getNombre(), alumno.getCalificacion());
+      }
+      System.out.println("--------------------------------------------------------------------------------");
+      System.out.printf("| %-18s: %-4s |\n", "Promedio del Grupo", curso.calcularPromedio());
+      System.out.println("----------------------------\n");
     }
 
     System.out.println("");
@@ -287,7 +285,9 @@ public class Escuela {
 
     listarMaterias();
 
+    System.out.println("0.- Cancelar");
     System.out.print("Seleccione una Materia: ");
+
     opcion = capturarOpcionNumerica(cMaterias);
 
     if (opcion >= 0)
@@ -297,10 +297,10 @@ public class Escuela {
 
     curso = cursos[cCursos - 1];
 
-    System.out.print("Desea asignar profesor? (si/no): ");
+    System.out.print("Desea asignar profesor 1.- Si  2.- No?: ");
     if (capturarOpcionBooleana()) {
       listarPorefesores();
-      System.out.println("0 - Cancelar");
+      System.out.println("0.- Cancelar");
 
       System.out.print("Seleccione un Profesor: ");
       opcion = capturarOpcionNumerica(cPorefesores);
@@ -309,25 +309,27 @@ public class Escuela {
         curso.asignarPrefesor(profesores[opcion]);
     }
 
-    System.out.print("Desea asignar Aula? (si/no): ");
+    System.out.print("Desea asignar Aula 1.- Si  2.- No?: ");
     if (capturarOpcionBooleana()) {
       listarAulas();
-      System.out.println("0 - Cancelar");
-
-      System.out.print("Seleccione un Aula: ");
-      opcion = capturarOpcionNumerica(cAulas);
-
-      if (opcion >= 0)
-        curso.agregarAula(aulas[opcion]);
-    }
-
-    System.out.print("Desea asignar Alumnos? (si/no): ");
-    if (capturarOpcionBooleana()) {
-      listarAlumnos();
-      System.out.println("0 - Cancelar");
+      System.out.println("0.- Cancelar");
 
       do {
+        System.out.print("Seleccione un Aula: ");
+        opcion = capturarOpcionNumerica(cAulas);
 
+        if (opcion >= 0)
+          curso.agregarAula(aulas[opcion]);
+
+      } while (opcion >= 0);
+    }
+
+    System.out.print("Desea asignar Alumnos 1.- Si  2.- No?: ");
+    if (capturarOpcionBooleana()) {
+      listarAlumnos();
+      System.out.println("0.- Cancelar");
+
+      do {
         System.out.print("Seleccione un Alumno: ");
         opcion = capturarOpcionNumerica(cAlumnos);
 
@@ -384,7 +386,7 @@ public class Escuela {
       opcion = sc.nextInt() - 1;
 
       if (!(opcion >= -1 && opcion < opciones))
-        System.out.print("Opción no válida, vuelve a seleccionar: ");
+        System.out.print("Opcion no valida, vuelve a seleccionar: ");
 
     } while (!(opcion >= -1 && opcion < opciones));
 
@@ -398,14 +400,14 @@ public class Escuela {
     boolean respuesta = false;
 
     do {
-      String opcion = sc.nextLine();
+      int opcion = sc.nextInt();
 
-      isValid = opcion.equals("si") || opcion.equals("no");
+      isValid = opcion == 1 || opcion == 2;
 
       if (isValid)
-        respuesta = opcion.equals("si") ? true : false;
+        respuesta = opcion == 1 ? true : false;
       else
-        System.out.print("Opcion no valida, ¿si o no?: ");
+        System.out.print("Opcion no valida, ¿1.-Si o 2.-No?: ");
 
     } while (!isValid);
 

@@ -5,8 +5,13 @@ public class App {
     Scanner sc = new Scanner(System.in);
     Escuela escuela = new Escuela("16TIC", "Av. Tecnologuico #550", "Tecnologuico de Mexico");
 
+    boolean seguir = true;
+
     do {
       switch (mostrarMenu()) {
+        case 0:
+          seguir = false;
+          break;
         case 11:
           escuela.listarCursos();
           break;
@@ -37,29 +42,40 @@ public class App {
         case 52:
           escuela.capturarMateria();
           break;
+        case 9999:
+          System.out.println("-- Cancelado --");
+          break;
         default:
           System.out.println("Opcion no valida");
           break;
       }
-    } while (true);
+    } while (seguir);
   }
 
   public static int mostrarMenu() {
     Scanner sc = new Scanner(System.in);
 
     System.out.println("\nMenu");
-    System.out.println("1) Cursos 2) Alumnos 3) Profesores 4) Aulas 5) Materias");
+    System.out.println("1) Cursos 2) Alumnos 3) Profesores 4) Aulas 5) Materias  0) Cancelar");
     System.out.print("Seleccione una opcion: ");
     int accion = sc.nextInt();
 
     if (accion == 0)
       return 0;
 
-    System.out.println("\n1) Mostrar 2) Agregar 3) Canselar");
-    System.out.print("Seleccione una opcion: ");
-    accion = accion * 10 + sc.nextInt();
+    if (accion < 1 && accion > 5)
+      return 10000;
 
-    System.out.println("\n");
-    return accion;
+    System.out.println("\n1) Mostrar 2) Agregar 0) Cancelar");
+    System.out.print("Seleccione una opcion: ");
+    int accion2 = sc.nextInt();
+
+    if (accion2 == 0)
+      return 9999;
+
+    if (accion < 1 && accion > 2)
+      return 10000;
+
+    return accion * 10 + accion2;
   }
 }

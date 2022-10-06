@@ -52,15 +52,15 @@ public class Curso {
   private void inicializarDatos() {
     cAlumnos = 0;
     cAulas = 0;
-	
-	profesor = new Profesor("P", "P", "P", "P", "P");
-	
-	/*
-	getCorreo()
-	getTelefono()
-	getRfc()
-	getNombre()
-	*/
+
+    profesor = new Profesor("P", "P", "P", "P", "P");
+
+    /*
+     * getCorreo()
+     * getTelefono()
+     * getRfc()
+     * getNombre()
+     */
   }
 
   // LOGICA DE LA CLASE
@@ -216,8 +216,8 @@ public class Curso {
     System.out.print("Horario: ");
     horario = sc.nextLine();
 
-    System.out.print("a) Precencial b) Distancia : ");
-    presencial = (sc.next() == "a") ? true : false;
+    System.out.print("1) Precencial 2) Distancia : ");
+    presencial = (sc.nextInt() == 1) ? true : false;
   }
 
   public boolean equals(String clave) {
@@ -280,8 +280,7 @@ public class Curso {
   public Aula[] getAulas() {
     return aulas;
   }
-  
-  
+
   public Alumno[] getAlumnos() {
     return alumnos;
   }
