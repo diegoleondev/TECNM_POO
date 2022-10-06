@@ -16,10 +16,6 @@ public class Curso {
   private int cAlumnos;
   private int cAulas;
 
-  /*
-   * 
-   * Pasarle meteria al constructor
-   */
   // CONSTRUCTORES
   public Curso(String clave, String nombre, boolean presencial, String periodo, String horario, String claveMateria,
       String unidades, String satca) {
@@ -41,26 +37,38 @@ public class Curso {
     this.periodo = periodo;
     this.horario = horario;
 
-    materia = new Materia(materia.getClave(), materia.getNombre(), materia.getUnidades(), materia.getClave());
+    this.materia = new Materia(materia.getClave(), materia.getNombre(), materia.getUnidades(), materia.getSatca());
+
+    inicializarDatos();
   }
 
   public Curso(Materia materia) {
     inicializarDatos();
-    this.nombre = materia.getNombre();
+    nombre = materia.getNombre();
+    this.materia = new Materia(materia.getClave(), materia.getNombre(), materia.getUnidades(), materia.getSatca());
     capturar();
   }
 
   private void inicializarDatos() {
     cAlumnos = 0;
     cAulas = 0;
+	
+	profesor = new Profesor("P", "P", "P", "P", "P");
+	
+	/*
+	getCorreo()
+	getTelefono()
+	getRfc()
+	getNombre()
+	*/
   }
 
   // LOGICA DE LA CLASE
   // Sobre Carga
 
-  public void mostrarPromedio() {
+  public int calcularPromedio() {
     if (cAlumnos == 0)
-      return;
+      return 0;
 
     int sumatoria = 0;
 
@@ -68,9 +76,7 @@ public class Curso {
       sumatoria += alumnos[i].getCalificacion();
     }
 
-    int promedio = sumatoria / cAlumnos;
-
-    System.out.println("Promedio del Curso: " + promedio + "\n");
+    return sumatoria / cAlumnos;
   }
 
   public void asignarCalificacion(String numeroControl, int calificacion) {
@@ -124,6 +130,10 @@ public class Curso {
   }
 
   public void mostrarProfesor() {
+    if (profesor == null) {
+      System.out.println("No hay Profesor \n");
+      return;
+    }
     profesor.mostrar();
     System.out.println("");
   }
@@ -258,4 +268,22 @@ public class Curso {
   public void setHorario(String horario) {
     this.horario = horario;
   }
+
+  public Materia getMateria() {
+    return materia;
+  }
+
+  public Profesor getProfesor() {
+    return profesor;
+  }
+
+  public Aula[] getAulas() {
+    return aulas;
+  }
+  
+  
+  public Alumno[] getAlumnos() {
+    return alumnos;
+  }
+
 }

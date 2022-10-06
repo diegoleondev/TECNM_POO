@@ -48,7 +48,7 @@ public class Escuela {
     // DB - Profesores
     profesores[0] = new Profesor("martin@tecnm.com", "TICS", "Martin", "MART20003", "443 111 5555");
     profesores[1] = new Profesor("omar@tecnm.com", "Matematicas", "Omar", "OMAR23003", "443 555 222");
-    profesores[2] = new Profesor("paco@tecnm.com", "Matematicas", "Omar", "OMAR23003", "443 555 222");
+    profesores[2] = new Profesor("paco@tecnm.com", "Matematicas", "Paco", "PACO23003", "442 465 752");
 
     cPorefesores = 3;
 
@@ -104,13 +104,24 @@ public class Escuela {
   // LOGICA DE LA CLASE
 
   public void listarCursos() {
-    String format = "%-2s %-6s %-20s %-13s %-8s %-10s\n";
+    String format = "| %-1s | %-5s | %-25s | %-12s | %-7s | %-11s |\n";
+    String format2 = "| %-37s | %-36s |\n";
+  String format3 = "| %-17s | %-17s | %-17s | %-16s |\n";
+  String format4 = "| %-1s | %-11s | %-51s | %-4s |\n";
+  
+    String separador = "--------------------------------------";// -2
 
     System.out.println("Cursos de " + nombre);
-    System.out.printf(format, "n", "Clave", "Nombre", "Periodo", "Horario", "Modalidad");
 
     for (int i = 0; i < cCursos; i++) {
       Curso curso = cursos[i];
+      Profesor profesor = curso.getProfesor();
+      Materia materia = curso.getMateria();
+	  Aula[] aulas = curso.getAulas();
+	  Alumno[] alumnos = curso.getAlumnos();
+
+      System.out.println("________________________________________________________________________________");
+      System.out.printf(format, "n", "Clave", "Nombre", "Periodo", "Horario", "Modalidad");
 
       System.out.printf(
           format,
@@ -120,9 +131,45 @@ public class Escuela {
           curso.getPeriodo(),
           curso.getHorario(),
           curso.isPresencial() ? "Presencial" : "Distancia");
-
-      curso.listarAlumnos();
-      curso.mostrarPromedio();
+      System.out.println("|---------------------------------------+--------------------------------------|");
+      System.out.printf(
+          format2, "Profesor", "Materia");
+      System.out.printf(
+          format2, "Nombre  : " + profesor.getNombre(), "Nombre  : " + materia.getNombre());
+      System.out.printf(
+          format2, "RFC     : " + profesor.getRfc(), "Clave   : " + materia.getClave());
+      System.out.printf(
+          format2, "Telefono: " + profesor.getTelefono(), "Satca   : " +
+              materia.getSatca());
+      System.out.printf(
+          format2, "Correo  : " + profesor.getCorreo(), "Unidades: " +
+              materia.getUnidades());
+	System.out.println("|------------------------------------ Aulas -----------------------------------|");
+	
+		System.out.printf(format3, "Nombre", "Edificio", "Capacidad", "Aula");
+		for(int j = 0; j < aulas.length; j++){
+			Aula aula = aulas[j];
+			
+			if (aula == null) break;
+			
+			System.out.printf(format3, aula.getNombre(), aula.getEdificio(), aula.getCapacidad(), aula.isAula() ? "Aula" : "Laboratorio");
+		}
+		System.out.println("|----------------------------------- Alumnos ----------------------------------|");
+		System.out.printf(format4,"n", "No. Control", "Nombre", "Cali");
+		for(int j = 0; j < alumnos.length; j++){
+			Alumno alumno = alumnos[j];
+			
+			if (alumno == null) break;
+			
+			System.out.printf(format4, j + 1, alumno.getNumeroControl(), alumno.getNombre(), alumno.getCalificacion());
+		}
+		System.out.println("--------------------------------------------------------------------------------");
+		System.out.printf("| %-18s: %-4s |\n", "Promedio del Grupo", curso.calcularPromedio());
+		System.out.println("----------------------------\n");
+      /*
+       * curso.listarAlumnos();
+       * curso.mostrarPromedio();
+       */
     }
 
     System.out.println("");
@@ -235,11 +282,61 @@ public class Escuela {
 
   public void capturarCurso() {
     Scanner sc = new Scanner(System.in);
+    Curso curso;
+    int opcion;
+
     listarMaterias();
 
-    System.out.print("Seleccione una Materia:");
+    System.out.print("Seleccione una Materia: ");
+    opcion = capturarOpcionNumerica(cMaterias);
 
-    cursos[cCursos++] = new Curso(materias[sc.nextInt() - 1]);
+    if (opcion >= 0)
+      cursos[cCursos++] = new Curso(materias[opcion]);
+    else
+      return;
+
+    curso = cursos[cCursos - 1];
+
+    System.out.print("Desea asignar profesor? (si/no): ");
+    if (capturarOpcionBooleana()) {
+      listarPorefesores();
+      System.out.println("0 - Cancelar");
+
+      System.out.print("Seleccione un Profesor: ");
+      opcion = capturarOpcionNumerica(cPorefesores);
+
+      if (opcion >= 0)
+        curso.asignarPrefesor(profesores[opcion]);
+    }
+
+    System.out.print("Desea asignar Aula? (si/no): ");
+    if (capturarOpcionBooleana()) {
+      listarAulas();
+      System.out.println("0 - Cancelar");
+
+      System.out.print("Seleccione un Aula: ");
+      opcion = capturarOpcionNumerica(cAulas);
+
+      if (opcion >= 0)
+        curso.agregarAula(aulas[opcion]);
+    }
+
+    System.out.print("Desea asignar Alumnos? (si/no): ");
+    if (capturarOpcionBooleana()) {
+      listarAlumnos();
+      System.out.println("0 - Cancelar");
+
+      do {
+
+        System.out.print("Seleccione un Alumno: ");
+        opcion = capturarOpcionNumerica(cAlumnos);
+
+        if (opcion >= 0)
+          curso.agregarAlumno(alumnos[opcion]);
+
+      } while (opcion >= 0);
+    }
+
   }
 
   public void capturarAlumno() {
@@ -279,4 +376,39 @@ public class Escuela {
     this.nombre = nombre;
   }
 
+  private int capturarOpcionNumerica(int opciones) {
+    Scanner sc = new Scanner(System.in);
+    int opcion;
+
+    do {
+      opcion = sc.nextInt() - 1;
+
+      if (!(opcion >= -1 && opcion < opciones))
+        System.out.print("Opción no válida, vuelve a seleccionar: ");
+
+    } while (!(opcion >= -1 && opcion < opciones));
+
+    return opcion;
+  }
+
+  private boolean capturarOpcionBooleana() {
+    Scanner sc = new Scanner(System.in);
+
+    boolean isValid;
+    boolean respuesta = false;
+
+    do {
+      String opcion = sc.nextLine();
+
+      isValid = opcion.equals("si") || opcion.equals("no");
+
+      if (isValid)
+        respuesta = opcion.equals("si") ? true : false;
+      else
+        System.out.print("Opcion no valida, ¿si o no?: ");
+
+    } while (!isValid);
+
+    return respuesta;
+  }
 }

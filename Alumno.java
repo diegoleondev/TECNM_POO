@@ -55,12 +55,11 @@ public class Alumno extends Persona {
     System.out.print("Carrera: ");
     carrera = sc.nextLine();
 
-    System.out.print("Genero: ");
+    System.out.print("Genero (m/f): ");
     genero = sc.nextLine().charAt(0);
 
-    System.out.print("Genero: ");
-    calificacion = sc.nextInt();
-
+    /*System.out.print("Calificacion: ");
+    calificacion = sc.nextInt();*/
   }
 
   public boolean equals(String numeroControl) {

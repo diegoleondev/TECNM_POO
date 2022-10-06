@@ -19,7 +19,7 @@ public class Profesor extends Persona {
   // Logica de la clase
   // @Override
   public void mostrar() {
-    String format = "%-16s: %s\n";
+    String format = "%-16s: %20s\n";
     System.out.println("---- Profesor ----");
     super.mostrar(format);
     System.out.printf(format, "  RFC", rfc);
