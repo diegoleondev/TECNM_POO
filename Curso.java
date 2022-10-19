@@ -64,21 +64,6 @@ public class Curso {
   }
 
   // LOGICA DE LA CLASE
-  // Sobre Carga
-
-  public int calcularPromedio() {
-    if (cAlumnos == 0)
-      return 0;
-
-    int sumatoria = 0;
-
-    for (int i = 0; i < cAlumnos; i++) {
-      sumatoria += alumnos[i].getCalificacion();
-    }
-
-    return sumatoria / cAlumnos;
-  }
-
   public void asignarCalificacion(String numeroControl, int calificacion) {
     for (int i = 0; i < cAlumnos; i++) {
       Alumno alumno = alumnos[i];
@@ -101,7 +86,8 @@ public class Curso {
     alumnos[cAlumnos++] = new Alumno(numeroControl, nombre, telefono, correo, carrera, genero);
   }
 
-  public void agregarAlumno(Alumno alumno) {
+  public void agregarAlumno(Persona persona) {
+    Alumno alumno = (Alumno) persona;
     alumnos[cAlumnos++] = new Alumno(
         alumno.getNombre(),
         alumno.getNumeroControl(),
@@ -116,7 +102,9 @@ public class Curso {
     profesor = new Profesor(correo, especializacion, nombre, rfc, telefono);
   }
 
-  public void asignarPrefesor(Profesor profesor) {
+  public void asignarPrefesor(Persona persona) {
+    Profesor profesor = (Profesor) persona;
+
     this.profesor = new Profesor(profesor.getCorreo(), profesor.getEspecializacion(), profesor.getNombre(),
         profesor.getRfc(), profesor.getTelefono());
   }
@@ -149,31 +137,38 @@ public class Curso {
       return;
     }
 
-    String format = "%-2s %-20s %-13s %-8s %-7s %-11s %-12s\n";
+    int acomulador = 0;
 
-    System.out.println("Alumnos:");
-    System.out.printf(format, "n", "Nombre", "No. Control", "Carrera", "Genero", "Telefono", "calificacion");
+    System.out.println("|----------------------------------- Alumnos ----------------------------------|");
+    String format = "| %-1s | %-11s | %-51s | %-4s |\n";
+
+    System.out.printf(format, "n", "No. Control", "Nombre", "Cali");
 
     for (int i = 0; i < cAlumnos; i++) {
       Alumno alumno = alumnos[i];
 
+      acomulador += alumnos[i].getCalificacion();
+
       System.out.printf(
           format,
           i + 1 + "",
-          alumno.getNombre(),
           alumno.getNumeroControl(),
-          alumno.getCarrera(),
-          alumno.getGenero(),
-          alumno.getTelefono(),
+          alumno.getNombre(),
           alumno.getCalificacion());
     }
-    System.out.println("");
+
+    int promedio = acomulador / (cAlumnos - 1);
+
+    System.out.println(
+        "--------------------------------------------------------------------------------");
+    System.out.printf("| %-18s: %-4s |\n", "Promedio del Grupo", promedio);
+    System.out.println("----------------------------\n");
   }
 
   public void listarAulas() {
-    String format = "%-2s %-7s %-9s %-10s %-13s \n";
+    String format = "| %-17s | %-17s | %-17s | %-16s |\n";
 
-    System.out.println("Aulas:");
+    System.out.println("|------------------------------------ Aulas -----------------------------------|");
     System.out.printf(format, "n", "Nombre", "Edificio", "Capacidad", "Tipo");
 
     for (int i = 0; i < cAulas; i++) {
@@ -187,7 +182,6 @@ public class Curso {
           aula.getCapacidad(),
           aula.isAula() ? "Laboratorio" : "Aula");
     }
-    System.out.println("");
   }
 
   public void mostrar() {

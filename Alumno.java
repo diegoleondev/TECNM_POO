@@ -5,6 +5,7 @@ public class Alumno extends Persona {
   private String carrera;
   private int calificacion;
   private char genero;
+  private Tutor tutor;
 
   // Constructores
   public Alumno(String nombre, String numeroControl,
@@ -15,6 +16,24 @@ public class Alumno extends Persona {
     this.genero = genero;
 
     inicialisaDatos();
+  }
+
+  public Alumno(Alumno alumno) {
+    super(alumno.getNombre(), alumno.getTelefono(), alumno.getCorreo());
+
+    numeroControl = alumno.getNumeroControl();
+    genero = alumno.getGenero();
+    carrera = alumno.getCarrera();
+
+    inicialisaDatos();
+  }
+
+  public Alumno(Persona persona) {
+    super(persona.getNombre(), persona.getTelefono(), persona.getCorreo());
+    Alumno alumno = (Alumno) persona;
+    this.numeroControl = alumno.getNumeroControl();
+    this.carrera = alumno.getCarrera();
+    this.genero = alumno.getGenero();
   }
 
   public Alumno() {
@@ -57,9 +76,10 @@ public class Alumno extends Persona {
 
     System.out.print("Genero (m/f): ");
     genero = sc.nextLine().charAt(0);
+  }
 
-    /*System.out.print("Calificacion: ");
-    calificacion = sc.nextInt();*/
+  public String quienSoy() {
+    return "Alumno";
   }
 
   public boolean equals(String numeroControl) {
@@ -68,6 +88,15 @@ public class Alumno extends Persona {
 
   public String toString() {
     return nombre + "\n" + carrera;
+  }
+
+  public void asignarTutor(Persona persona) {
+    Tutor tutor = (Tutor) persona;
+    this.tutor = new Tutor(tutor);
+  }
+
+  public boolean hasTutor(String rfc) {
+    return tutor.getRfc() == rfc;
   }
 
   // Encapsulamiento
@@ -118,4 +147,9 @@ public class Alumno extends Persona {
   public int getCalificacion() {
     return calificacion;
   }
+
+  public Tutor getTutor() {
+    return tutor;
+  }
+
 }

@@ -8,17 +8,14 @@ public class Escuela {
   private Curso cursos[] = new Curso[500];
   private int cCursos;
 
-  private Profesor profesores[] = new Profesor[500];
-  private int cPorefesores;
-
   private Aula aulas[] = new Aula[500];
   private int cAulas;
 
-  private Alumno alumnos[] = new Alumno[500];
-  private int cAlumnos;
-
   private Materia materias[] = new Materia[500];
   private int cMaterias;
+
+  private Persona personas[] = new Persona[100];
+  private int cPersonas;
 
   public Escuela(String clave, String domicilio, String nombre) {
     this.clave = clave;
@@ -46,11 +43,22 @@ public class Escuela {
     cCursos = 3;
 
     // DB - Profesores
-    profesores[0] = new Profesor("martin@tecnm.com", "TICS", "Martin", "MART20003", "443 111 5555");
-    profesores[1] = new Profesor("omar@tecnm.com", "Matematicas", "Omar", "OMAR23003", "443 555 222");
-    profesores[2] = new Profesor("paco@tecnm.com", "Matematicas", "Paco", "PACO23003", "442 465 752");
+    personas[0] = new Alumno("Antonio Gomez", "22120601", "441 555 6666", "antonio@email.com", "ISC", 'M');
+    personas[1] = new Alumno("Juan Diaz", "22120602", "441 555 6666", "juan@email.com", "ISC", 'M');
+    personas[2] = new Alumno("Alexis Lora", "22120603", "441 555 6666", "alexis@email.com", "ISC", 'M');
+    personas[3] = new Alumno("Alexis Posgrado", "22120603", "441 555 6666", "alexis@email.com", "ISC", 'M');
+    personas[4] = new Alumno("Paco Posgrado", "22120444", "441 555 6456", "paco@email.com", "ISC", 'M');
+    personas[5] = new Profesor("martin@tecnm.com", "TICS", "Martin", "MART20003", "443 111 5555");
+    personas[6] = new Profesor("omar@tecnm.com", "Matematicas", "Omar", "OMAR23003", "443 555 222");
+    personas[7] = new Profesor("paco@tecnm.com", "Matematicas", "Paco", "PACO23003", "442 465 752");
+    personas[8] = new Tutor(personas[5], "mate - quimica", true, "02/02/2010", "modulo 1");
+    personas[9] = new Tutor(personas[6], "fisica - quimica", true, "08/02/205", "modulo 5");
+    personas[10] = new AlumnoPosgrado(personas[0], "Chiles Maria", "Gerente", "Chiles", "Soltero", "08/10/2025",
+        "tecmorelia", "Ing. Sistemas", "XXX-XXX-CEDULA");
+    personas[11] = new AlumnoPosgrado(personas[1], "Tacos Jose", "Gerente", "Tacos", "Soltero", "04/04/2025",
+        "tecmorelia", "Ing. Sistemas", "XXX-XXX-CEDULA");
 
-    cPorefesores = 3;
+    cPersonas = 12;
 
     // DB - Aulas
     aulas[0] = new Aula(true, 30, "AG", "LC1");
@@ -60,33 +68,47 @@ public class Escuela {
 
     cAulas = 4;
 
-    // DB - Alumnos
-    alumnos[0] = new Alumno("Antonio Gomez", "22120601", "441 555 6666", "antonio@email.com", "ISC", 'M');
-    alumnos[1] = new Alumno("Juan Diaz", "22120602", "441 555 6666", "juan@email.com", "ISC", 'M');
-    alumnos[2] = new Alumno("Alexis Lora", "22120603", "441 555 6666", "alexis@email.com", "ISC", 'M');
+    // 0 - 4 Alumnos y de 8 - 9 Tutores
+    /*
+     * personas[0].asignarTutor(personas[8]);
+     * personas[1].asignarTutor(personas[9]);
+     * personas[2].asignarTutor(personas[9]);
+     * personas[3].asignarTutor(personas[9]);
+     * personas[4].asignarTutor(personas[8]);
+     */
 
-    cAlumnos = 3;
+    Alumno a1 = (Alumno) personas[0],
+        a2 = (Alumno) personas[1],
+        a3 = (Alumno) personas[2],
+        a4 = (Alumno) personas[3],
+        a5 = (Alumno) personas[4];
+
+    a1.asignarTutor(personas[8]);
+    a2.asignarTutor(personas[8]);
+    a3.asignarTutor(personas[9]);
+    a4.asignarTutor(personas[9]);
+    a5.asignarTutor(personas[9]);
 
     // Asignaciones
 
-    cursos[0].asignarPrefesor(profesores[0]);
-    cursos[1].asignarPrefesor(profesores[1]);
-    cursos[2].asignarPrefesor(profesores[2]);
+    cursos[0].asignarPrefesor(personas[5]);
+    cursos[1].asignarPrefesor(personas[6]);
+    cursos[2].asignarPrefesor(personas[7]);
 
     cursos[0].agregarAula(aulas[0]);
     cursos[0].agregarAula(aulas[0]);
     cursos[1].agregarAula(aulas[1]);
     cursos[2].agregarAula(aulas[2]);
 
-    cursos[0].agregarAlumno(alumnos[0]);
-    cursos[0].agregarAlumno(alumnos[1]);
-    cursos[0].agregarAlumno(alumnos[2]);
-    cursos[1].agregarAlumno(alumnos[0]);
-    cursos[1].agregarAlumno(alumnos[1]);
-    cursos[1].agregarAlumno(alumnos[2]);
-    cursos[2].agregarAlumno(alumnos[0]);
-    cursos[2].agregarAlumno(alumnos[1]);
-    cursos[2].agregarAlumno(alumnos[2]);
+    cursos[0].agregarAlumno(personas[0]);
+    cursos[0].agregarAlumno(personas[1]);
+    cursos[0].agregarAlumno(personas[2]);
+    cursos[1].agregarAlumno(personas[0]);
+    cursos[1].agregarAlumno(personas[1]);
+    cursos[1].agregarAlumno(personas[2]);
+    cursos[2].agregarAlumno(personas[0]);
+    cursos[2].agregarAlumno(personas[1]);
+    cursos[2].agregarAlumno(personas[2]);
 
     /* Calificaciones */
     cursos[0].asignarCalificacion(0, 60);
@@ -98,7 +120,6 @@ public class Escuela {
     cursos[2].asignarCalificacion("22120601", 90);
     cursos[2].asignarCalificacion("22120602", 95);
     cursos[2].asignarCalificacion("22120603", 100);
-
   }
 
   // LOGICA DE LA CLASE
@@ -106,10 +127,6 @@ public class Escuela {
   public void listarCursos() {
     String format = "| %-1s | %-5s | %-25s | %-12s | %-7s | %-11s |\n";
     String format2 = "| %-37s | %-36s |\n";
-    String format3 = "| %-17s | %-17s | %-17s | %-16s |\n";
-    String format4 = "| %-1s | %-11s | %-51s | %-4s |\n";
-
-    String separador = "--------------------------------------";// -2
 
     System.out.println("Cursos de " + nombre);
 
@@ -117,8 +134,6 @@ public class Escuela {
       Curso curso = cursos[i];
       Profesor profesor = curso.getProfesor();
       Materia materia = curso.getMateria();
-      Aula[] aulas = curso.getAulas();
-      Alumno[] alumnos = curso.getAlumnos();
 
       System.out.println("________________________________________________________________________________");
       System.out.printf(format, "n", "Clave", "Nombre", "Periodo", "Horario", "Modalidad");
@@ -144,53 +159,130 @@ public class Escuela {
       System.out.printf(
           format2, "Correo  : " + profesor.getCorreo(), "Unidades: " +
               materia.getUnidades());
-      System.out.println("|------------------------------------ Aulas -----------------------------------|");
-      System.out.printf(format3, "Nombre", "Edificio", "Capacidad", "Aula");
-      for (int j = 0; j < aulas.length; j++) {
-        Aula aula = aulas[j];
+      curso.listarAulas();
+      curso.listarAlumnos();
 
-        if (aula == null)
-          break;
-
-        System.out.printf(format3, aula.getNombre(), aula.getEdificio(), aula.getCapacidad(),
-            aula.isAula() ? "Aula" : "Laboratorio");
-      }
-      System.out.println("|----------------------------------- Alumnos ----------------------------------|");
-      System.out.printf(format4, "n", "No. Control", "Nombre", "Cali");
-      for (int j = 0; j < alumnos.length; j++) {
-        Alumno alumno = alumnos[j];
-
-        if (alumno == null)
-          break;
-
-        System.out.printf(format4, j + 1, alumno.getNumeroControl(), alumno.getNombre(), alumno.getCalificacion());
-      }
-      System.out.println("--------------------------------------------------------------------------------");
-      System.out.printf("| %-18s: %-4s |\n", "Promedio del Grupo", curso.calcularPromedio());
-      System.out.println("----------------------------\n");
     }
 
     System.out.println("");
 
   }
 
-  public void listarPorefesores() {
+  public void listarTutores() {
+    String format = "| %-15s: %-20s  %-15s: %-20s |\n";
+    int cTutores = 0;
+    for (int i = 0; i < cPersonas; i++) {
+      if (!personas[i].quienSoy().equals("Tutor"))
+        continue;
+      Tutor tutor = (Tutor) personas[i];
+
+      System.out.println("|------------------------------------------------------------------------------|");
+      System.out.printf("| %-3s. Nombre: %-63s |", cTutores + 1, tutor.getNombre());
+      System.out.println("\n|------------------------------------------------------------------------------|");
+      System.out.printf(format,
+          "Correo", tutor.getCorreo(),
+          "Otros Cursos", tutor.getOtrosCursos());
+      System.out.printf(format,
+          "Telefono", tutor.getTelefono(),
+          "TomoDiplomado", tutor.getTomoDiplomado());
+      System.out.printf(format,
+          "Especializacion", tutor.getEspecializacion(),
+          "FechaDiploma", tutor.getFechaDiploma());
+      System.out.printf(format,
+          "Rfc", tutor.getRfc(),
+          "ModuloDiplomado", tutor.getModuloDiplomado());
+
+      cTutores++;
+    }
+    System.out.println("|______________________________________________________________________________|");
+
+    /* Ref!!!! */
+
+    System.out.print("Seleccione un Tutor: ");
+
+    int index = capturarOpcionNumerica(cTutores);
+    int contador = 0;
+    for (int i = 0; i < cPersonas; i++) {
+      if (!personas[i].quienSoy().equals("Tutor"))
+        continue;
+
+      if (index == contador) {
+        Tutor tutor = (Tutor) personas[i];
+
+        System.out.println(tutor.getNombre() + " tutora a: ");
+        int c = 1;
+        for (int j = 0; j < cPersonas; j++) {
+          if (!personas[j].quienSoy().equals("Alumno"))
+            continue;
+
+          Alumno alumno = (Alumno) personas[j];
+
+          if (alumno.hasTutor(tutor.getRfc()))
+            System.out.println((c++) + ".- " + alumno.getNombre());
+        }
+      }
+
+      contador++;
+    }
+
+  }
+
+  public void listarAlumnosPosgrado() {
+    String format2 = "| %-7s: %-13s %-7s: %-19s %-6s: %-16s |\n";
+    int c = 0;
+    for (int i = 0; i < cPersonas; i++) {
+      if (!personas[i].quienSoy().equals("AlumnoPosgrado"))
+        continue;
+
+      AlumnoPosgrado alumno = (AlumnoPosgrado) personas[i];
+      Cedula cedula = alumno.getCedula();
+
+      System.out.println("|------------------------------------------------------------------------------|");
+      System.out.printf("| %-3s. Nombre: %-63s |", (c++) + 1, alumno.getNombre());
+      System.out.println("\n|------------------------------------------------------------------------------|");
+      System.out.printf(format2,
+          "N.Contr", alumno.getNumeroControl(),
+          "Empresa", alumno.getEmpresa(),
+          "Fecha", cedula.getFecha());
+      System.out.printf(format2,
+          "Correo", "Muy largo",
+          "Puesto", alumno.getPuesto(),
+          "Insti.", cedula.getInstitucion());
+      System.out.printf(format2,
+          "Tel", alumno.getTelefono(),
+          "Interes", alumno.getLineaDeInteres(),
+          "Cedula", cedula.getNumCedula());
+      System.out.printf(format2,
+          "Cali", alumno.getCalificacion(),
+          "Estado", alumno.getEstadoCivil(),
+          "Titulo", cedula.getTitulo());
+    }
+    System.out.println("|______________________________________________________________________________|");
+  }
+
+  public int listarPorefesores() {
     String format = "%-2s %-20s %-20s %-16s %-11s %-11s\n";
     System.out.println("Porefesores de " + nombre);
     System.out.printf(format, "n", "Nombre", "Correo", "Especializacion", "RFC", "Telefono");
 
-    for (int i = 0; i < cPorefesores; i++) {
-      Profesor profesor = profesores[i];
+    int c = 0;
+    for (int i = 0; i < cPersonas; i++) {
+      if (!personas[i].quienSoy().equals("Profesor"))
+        continue;
+
+      Profesor profesor = (Profesor) personas[i];
 
       System.out.printf(
           format,
-          i + 1,
+          (c++) + 1,
           profesor.getNombre(),
           profesor.getCorreo(),
           profesor.getEspecializacion(),
           profesor.getRfc(),
           profesor.getTelefono());
     }
+
+    return c;
   }
 
   public void listarAulas() {
@@ -211,20 +303,21 @@ public class Escuela {
     }
   }
 
-  public void listarAlumnos() {
-    if (cAlumnos == 0) {
-      System.out.println("No hay alumnos registrados");
-      return;
-    }
+  public int listarAlumnos() {
 
-    String format = "%-2s %-12s %-15s %-10s %-5s %-11s %-13s\n";
+    String format = "%-2s %-12s %-15s %-10s %-5s %-13s\n";
     System.out.println("Alumnos de " + nombre);
-    System.out.printf(format, "n", "No. Control", "Nombre", "Carrera", "Sexo", "Telefono", "Calificacion");
+    System.out.printf(format, "n", "No. Control", "Nombre", "Carrera", "Sexo", "Telefono");
+
+    int cAlumnos = 0;
 
     // Promedio
-    for (int i = 0; i < cAlumnos; i++) {
-      Alumno alumno = alumnos[i];
+    for (int i = 0; i < cPersonas; i++) {
+      if (!personas[i].quienSoy().equals("Alumno"))
+        continue;
 
+      cAlumnos++;
+      Alumno alumno = (Alumno) personas[i];
       System.out.printf(
           format,
           i + 1,
@@ -232,9 +325,13 @@ public class Escuela {
           alumno.getNombre(),
           alumno.getCarrera(),
           alumno.getGenero(),
-          alumno.getTelefono(),
-          alumno.getCalificacion() + "");
+          alumno.getTelefono());
+      System.out.println("Tutor: " + alumno.getTutor().getNombre());
+      System.out.println("Especializacion: " + alumno.getTutor().getEspecializacion());
+      System.out.println("");
     }
+
+    return cAlumnos;
   }
 
   public void listarMaterias() {
@@ -275,11 +372,10 @@ public class Escuela {
   }
 
   public void capturarProfesor() {
-    profesores[cPorefesores++] = new Profesor();
+    personas[cPersonas++] = new Profesor();
   }
 
   public void capturarCurso() {
-    Scanner sc = new Scanner(System.in);
     Curso curso;
     int opcion;
 
@@ -299,14 +395,24 @@ public class Escuela {
 
     System.out.print("Desea asignar profesor 1.- Si  2.- No?: ");
     if (capturarOpcionBooleana()) {
-      listarPorefesores();
+      int cProfesores = listarPorefesores();
       System.out.println("0.- Cancelar");
 
       System.out.print("Seleccione un Profesor: ");
-      opcion = capturarOpcionNumerica(cPorefesores);
+      opcion = capturarOpcionNumerica(cProfesores);
 
-      if (opcion >= 0)
-        curso.asignarPrefesor(profesores[opcion]);
+      int c = 0;
+      if (opcion >= 0) {
+        for (int i = 0; i < cPersonas; i++) {
+          if (!personas[i].quienSoy().equals("Profesor"))
+            continue;
+
+          if (c == opcion)
+            curso.asignarPrefesor(personas[i]);
+
+        }
+      }
+
     }
 
     System.out.print("Desea asignar Aula 1.- Si  2.- No?: ");
@@ -326,23 +432,30 @@ public class Escuela {
 
     System.out.print("Desea asignar Alumnos 1.- Si  2.- No?: ");
     if (capturarOpcionBooleana()) {
-      listarAlumnos();
+      int cAlumnos = listarAlumnos();
       System.out.println("0.- Cancelar");
 
       do {
         System.out.print("Seleccione un Alumno: ");
         opcion = capturarOpcionNumerica(cAlumnos);
 
-        if (opcion >= 0)
-          curso.agregarAlumno(alumnos[opcion]);
+        int c = 0;
+        if (opcion >= 0) {
+          for (int i = 0; i < cPersonas; i++) {
+            if (!personas[i].quienSoy().equals("Alumno"))
+              continue;
 
+            if (c == opcion)
+              curso.agregarAlumno(personas[i]);
+          }
+        }
       } while (opcion >= 0);
     }
 
   }
 
   public void capturarAlumno() {
-    alumnos[cAlumnos++] = new Alumno();
+    personas[cPersonas++] = new Alumno();
   }
 
   public void capturarAula() {

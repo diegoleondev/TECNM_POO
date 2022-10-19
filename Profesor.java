@@ -12,6 +12,14 @@ public class Profesor extends Persona {
     this.rfc = rfc;
   }
 
+  public Profesor(Persona persona) {
+    super(persona.getNombre(), persona.getTelefono(), persona.getCorreo());
+
+    Profesor profesor = (Profesor) persona;
+    this.especializacion = profesor.getEspecializacion();
+    this.rfc = profesor.getRfc();
+  }
+
   public Profesor() {
     capturar();
   }
@@ -24,6 +32,10 @@ public class Profesor extends Persona {
     super.mostrar(format);
     System.out.printf(format, "  RFC", rfc);
     System.out.printf(format, "  Telefono", telefono);
+  }
+
+  public String quienSoy() {
+    return "Profesor";
   }
 
   public void capturar() {

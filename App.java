@@ -42,6 +42,17 @@ public class App {
         case 52:
           escuela.capturarMateria();
           break;
+        case 61:
+          escuela.listarTutores();
+          break;
+        case 71:
+          escuela.listarAlumnosPosgrado();
+          break;
+        /*
+         * case 72:
+         * escuela.capturarAlumnoPosgrado();
+         * break;
+         */
         case 9999:
           System.out.println("-- Cancelado --");
           break;
@@ -56,7 +67,8 @@ public class App {
     Scanner sc = new Scanner(System.in);
 
     System.out.println("\nMenu");
-    System.out.println("1) Cursos 2) Alumnos 3) Profesores 4) Aulas 5) Materias  0) Cancelar");
+    System.out
+        .println("1) Cursos 2) Alumnos 3) Profesores 4) Aulas 5) Materias 6) Tutores 7)Alumnos Posgrado  0) Cancelar");
     System.out.print("Seleccione una opcion: ");
     int accion = sc.nextInt();
 

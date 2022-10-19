@@ -1,16 +1,16 @@
-public class Persona {
+public abstract class Persona {
   protected String correo;
   protected String nombre;
   protected String telefono;
 
   public Persona(String nombre, String telefono, String correo) {
     this.nombre = nombre;
-    this.telefono = nombre;
+    this.telefono = telefono;
     this.correo = correo;
   }
 
   public Persona() {
-
+    // Requerido para capturar los datos en las clases hijos
   }
 
   protected void mostrar(String format) {
@@ -18,6 +18,8 @@ public class Persona {
     System.out.printf(format, "Telefono", telefono);
     System.out.printf(format, "correo", correo);
   }
+
+  protected abstract String quienSoy();
 
   protected String getCorreo() {
     return correo;
