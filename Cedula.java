@@ -1,10 +1,11 @@
 import java.util.Scanner;
 
-public class Cedula {
+public class Cedula implements Acciones {
   private String fecha;
   private String institucion;
   private String titulo;
   private String numCedula;
+  private boolean eliminada = false;
 
   public Cedula(String fecha, String institucion, String titulo, String numCedula) {
     this.fecha = fecha;
@@ -20,22 +21,40 @@ public class Cedula {
   public void capturar() {
     Scanner sc = new Scanner(System.in);
 
-    System.out.println("Capturar Cedula:");
-
-    System.out.print("Fecha:");
+    System.out.print("Fecha : ");
     fecha = sc.nextLine();
 
-    System.out.print("Institucion:");
+    System.out.print("Institucion : ");
     institucion = sc.nextLine();
 
-    System.out.print("Titulo:");
+    System.out.print("Titulo : ");
     titulo = sc.nextLine();
 
-    System.out.print("NumCedula:");
+    System.out.print("NumCedula : ");
     numCedula = sc.nextLine();
   }
 
-  /*  */
+  public boolean isEliminada() {
+    return eliminada;
+  }
+
+  public void eliminar() {
+    eliminada = true;
+  }
+
+  public void modificar() {
+  }
+
+  public boolean buscar(String string) {
+    return true;
+  }
+
+  public void mostrar() {
+    System.out.println("Fecha : " + fecha);
+    System.out.println("Institucion : " + institucion);
+    System.out.println("Titulo : " + titulo);
+    System.out.println("Num Cedula : " + numCedula);
+  }
 
   public String getFecha() {
     return fecha;

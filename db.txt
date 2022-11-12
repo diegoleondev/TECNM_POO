@@ -1,0 +1,73 @@
+// DB - Materias
+    materias[0] = new Materia("AED-1287", "Programacion Orientada a Objetos", "5", "3-2-5");
+    materias[1] = new Materia("AED-1246", "Calculo Integral", "5", "1-2-3");
+    materias[2] = new Materia("AED-1275", "Algebra Lineal", "4", "3-2-5");
+
+    cMaterias = 3;
+
+    // DB - Cursos
+    cursos[0] = new Curso("B2L1A", true, "ago-dic 2022", "09:00", materias[0]);
+    cursos[1] = new Curso("B2L2A", true, "ago-dic 2022", "08:00", materias[1]);
+    cursos[2] = new Curso("B2L3A", false, "ago-dic 2022", "10:00", materias[2]);
+
+    cCursos = 3;
+
+    // DB - Profesores
+    personas[0] = new Alumno("Antonio Gomez", "22120601", "441 555 6666", "antonio@email.com", "ISC", 'M');
+    personas[1] = new Alumno("Juan Diaz", "22120602", "441 555 6666", "juan@email.com", "ISC", 'M');
+    personas[2] = new Alumno("Alexis Salgado", "22120603", "441 555 6666", "alexis@email.com", "ISC", 'M');
+    personas[3] = new Alumno("Samuel Rodrigez", "22120604", "441 555 6666", "alexis@email.com", "ISC", 'M');
+    personas[4] = new Alumno("Paco Aguilar", "22120605", "441 555 6456", "paco@email.com", "ISC", 'M');
+    personas[5] = new Profesor("martin@tecnm.com", "TICS", "Martin Martinez", "MART20003", "443 111 5555");
+    personas[6] = new Profesor("omar@tecnm.com", "Matematicas", "Omar Calderon", "OMAR23003", "443 555 222");
+    personas[7] = new Profesor("paco@tecnm.com", "Matematicas", "Gerardo Diaz", "PACO23003", "442 465 752");
+    personas[8] = new Tutor(personas[5], "mate - quimica", true, "02/02/2010", "modulo 1");
+    personas[9] = new Tutor(personas[6], "fisica - quimica", true, "08/02/205", "modulo 5");
+    personas[10] = new AlumnoPosgrado(personas[0], "Chiles Maria", "Gerente", "Chiles", "Soltero", "08/10/2025",
+        "tecmorelia", "Ing. Sistemas", "XXX-XXX-CEDULA");
+    personas[11] = new AlumnoPosgrado(personas[1], "Tacos Jose", "Gerente", "Tacos", "Soltero", "04/04/2025",
+        "tecmorelia", "Ing. Sistemas", "XXX-XXX-CEDULA");
+
+    cPersonas = 12;
+    Alumno a1 = (Alumno) personas[0],
+        a2 = (Alumno) personas[1],
+        a3 = (Alumno) personas[2],
+        a4 = (Alumno) personas[3],
+        a5 = (Alumno) personas[4];
+
+    a1.asignarTutor(personas[8]);
+    a2.asignarTutor(personas[8]);
+    a3.asignarTutor(personas[9]);
+    a4.asignarTutor(personas[9]);
+    a5.asignarTutor(personas[9]);
+
+    // Asignaciones
+
+    cursos[0].asignarPrefesor(personas[5]);
+    cursos[1].asignarPrefesor(personas[6]);
+    cursos[2].asignarPrefesor(personas[7]);
+
+    cursos[0].agregarAula(aulas[0]);
+    cursos[0].agregarAula(aulas[1]);
+    cursos[1].agregarAula(aulas[2]);
+
+    cursos[0].agregarAlumno(personas[0]);
+    cursos[0].agregarAlumno(personas[1]);
+    cursos[0].agregarAlumno(personas[2]);
+    cursos[1].agregarAlumno(personas[0]);
+    cursos[1].agregarAlumno(personas[1]);
+    cursos[1].agregarAlumno(personas[2]);
+    cursos[2].agregarAlumno(personas[0]);
+    cursos[2].agregarAlumno(personas[1]);
+    cursos[2].agregarAlumno(personas[2]);
+
+    /* Calificaciones */
+    cursos[0].asignarCalificacion(0, 60);
+    cursos[0].asignarCalificacion(1, 65);
+    cursos[0].asignarCalificacion(2, 70);
+    cursos[1].asignarCalificacion("22120601", 80);
+    cursos[1].asignarCalificacion("22120602", 85);
+    cursos[1].asignarCalificacion("22120603", 90);
+    cursos[2].asignarCalificacion("22120601", 90);
+    cursos[2].asignarCalificacion("22120602", 95);
+    cursos[2].asignarCalificacion("22120603", 100);

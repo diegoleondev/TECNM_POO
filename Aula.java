@@ -1,10 +1,12 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Aula {
+public class Aula implements Acciones, Serializable {
   private boolean aula;
   private int capacidad;
   private String edificio;
   private String nombre;
+  private boolean eliminada = false;
 
   // Constructores
   public Aula(boolean aula, int capacidad, String edificio, String nombre) {
@@ -18,21 +20,55 @@ public class Aula {
     capturar();
   }
 
-  // Logica de la clase
-  public void mostrar() {
-    String format = "%-10s: %s\n";
+  /* ==============================[ LOGUICA ]============================= */
+  public void modificar() {
+    if (eliminada)
+      return;
+    Scanner sc = new Scanner(System.in);
 
-    System.out.println("\nDatos del Aula");
-    System.out.printf(format, "  Edificio", edificio);
-    System.out.printf(format, "  Nombre", nombre);
-    System.out.printf(format, "  Capasidad", capacidad);
-    System.out.printf(format, "  Tipo", aula ? "Aula" : "Laboratorio");
+    do {
+      System.out.println(" 1) Nombre 2) Edificio 3) Aula 4) Capacidad 0) Cancelar");
+      System.out.print("Seleccione un valor a Modificar : ");
+
+      switch (sc.nextInt()) {
+        case 0:
+          return;
+        case 1:
+          System.out.print("Introduzca el nuevo nombre : ");
+          nombre = sc.next();
+          break;
+        case 2:
+          System.out.print("Introduzca el nuevo edificio : ");
+          edificio = sc.next();
+          break;
+        case 3:
+          System.out.print("1 ) Aula 2) Laboratorio : ");
+          aula = sc.nextInt() == 1;
+          break;
+        case 4:
+          System.out.print("Introduzca la nueva capacidad : ");
+          capacidad = sc.nextInt();
+          break;
+        default:
+          System.out.println("Opccion no valida. ");
+          break;
+      }
+
+      System.out.println("");
+    } while (true);
+  }
+
+  public void mostrar() {
+    String format = "%-15s: %s\n";
+
+    System.out.printf(format, "Edificio", edificio);
+    System.out.printf(format, "Nombre", nombre);
+    System.out.printf(format, "Capasidad", capacidad);
+    System.out.printf(format, "Tipo", aula ? "Aula" : "Laboratorio");
   }
 
   public void capturar() {
     Scanner sc = new Scanner(System.in);
-
-    System.out.println("\nIngrese los datos del Aula");
 
     System.out.print("Edificio: ");
     edificio = sc.nextLine();
@@ -43,16 +79,30 @@ public class Aula {
     System.out.print("Capasidad: ");
     capacidad = sc.nextInt();
 
-    System.out.print("a) Aula  b) Laboratorio: ");
-    aula = (sc.next().charAt(0) == 'a') ? true : false;
+    System.out.print("1) Aula  2) Laboratorio: ");
+    aula = (sc.nextInt() == 1) ? true : false;
   }
 
-  public boolean equals(String nombre, String edificio) {
-    return (this.nombre == nombre && this.edificio == edificio) ? true : false;
+  public boolean equals(String clave) {
+    return (edificio + nombre).equals(clave);
+  }
+
+  public boolean buscar(String string) {
+    String cadena = (aula ? "Aula" : "Laboratorio") + capacidad + edificio + nombre;
+
+    return cadena.indexOf(string) >= 0 ? true : false;
+  }
+
+  public void eliminar() {
+    eliminada = true;
+  }
+
+  public boolean isEliminada() {
+    return eliminada;
   }
 
   public String toString() {
-    return nombre + "\n" + edificio;
+    return edificio + nombre;
   }
 
   // Encapsulamiento

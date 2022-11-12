@@ -1,15 +1,16 @@
 import java.util.Scanner;
 
-public class Curso {
+public class Curso implements Acciones {
   // Atributos
   private String clave;
   private boolean presencial;
   private String periodo;
   private String nombre;
   private String horario;
+  private boolean eliminada;
 
-  private Alumno alumnos[] = new Alumno[40];
-  private Aula aulas[] = new Aula[5];
+  private Alumno alumnos[] = new Alumno[100];
+  private Aula aulas[] = new Aula[100];
   private Profesor profesor;
   private Materia materia;
 
@@ -43,27 +44,25 @@ public class Curso {
   }
 
   public Curso(Materia materia) {
-    inicializarDatos();
     nombre = materia.getNombre();
-    this.materia = new Materia(materia.getClave(), materia.getNombre(), materia.getUnidades(), materia.getSatca());
+    this.materia = new Materia(
+        materia.getClave(),
+        materia.getNombre(),
+        materia.getUnidades(),
+        materia.getSatca());
     capturar();
+    inicializarDatos();
   }
 
   private void inicializarDatos() {
     cAlumnos = 0;
     cAulas = 0;
 
-    profesor = new Profesor("P", "P", "P", "P", "P");
-
-    /*
-     * getCorreo()
-     * getTelefono()
-     * getRfc()
-     * getNombre()
-     */
+    eliminada = false;
   }
 
-  // LOGICA DE LA CLASE
+  /* ==============================[ LOGUICA ]============================= */
+
   public void asignarCalificacion(String numeroControl, int calificacion) {
     for (int i = 0; i < cAlumnos; i++) {
       Alumno alumno = alumnos[i];
@@ -84,6 +83,43 @@ public class Curso {
   public void agregarAlumno(String numeroControl, String nombre, String telefono, String correo, String carrera,
       char genero) {
     alumnos[cAlumnos++] = new Alumno(numeroControl, nombre, telefono, correo, carrera, genero);
+  }
+
+  public void eliminarAlumno(String clave) {
+    for (Alumno alumno : alumnos) {
+      if (alumno == null) {
+        System.out.println("* No se encontraron coincidencias. ");
+        return;
+      }
+      if (alumno.isEliminada())
+        continue;
+      if (!alumno.equals(clave))
+        continue;
+
+      alumno.eliminar();
+      System.out.println("+ Alumno eliminado. ");
+
+      return;
+    }
+
+  }
+
+  public void eliminarAula(String clave) {
+    for (Aula aula : aulas) {
+      if (aula == null) {
+        System.out.println("* No se encontraron coincidencias. ");
+        return;
+      }
+      if (aula.isEliminada())
+        continue;
+      if (!aula.equals(clave))
+        continue;
+
+      aula.eliminar();
+      System.out.println("+ Aula eliminada. ");
+      return;
+    }
+
   }
 
   public void agregarAlumno(Persona persona) {
@@ -114,7 +150,8 @@ public class Curso {
   }
 
   public void agregarAula(Aula aula) {
-    aulas[cAulas++] = new Aula(aula.isAula(), aula.getCapacidad(), aula.getEdificio(), aula.getNombre());
+    if (presencial)
+      aulas[cAulas++] = new Aula(aula.isAula(), aula.getCapacidad(), aula.getEdificio(), aula.getNombre());
   }
 
   public void mostrarProfesor() {
@@ -137,69 +174,80 @@ public class Curso {
       return;
     }
 
-    int acomulador = 0;
+    for (Alumno alumno : alumnos) {
+      if (alumno == null)
+        continue;
+      if (alumno.isEliminada())
+        continue;
 
-    System.out.println("|----------------------------------- Alumnos ----------------------------------|");
-    String format = "| %-1s | %-11s | %-51s | %-4s |\n";
-
-    System.out.printf(format, "n", "No. Control", "Nombre", "Cali");
-
-    for (int i = 0; i < cAlumnos; i++) {
-      Alumno alumno = alumnos[i];
-
-      acomulador += alumnos[i].getCalificacion();
-
-      System.out.printf(
-          format,
-          i + 1 + "",
-          alumno.getNumeroControl(),
-          alumno.getNombre(),
-          alumno.getCalificacion());
+      System.out.println("  > " + alumno);
     }
-
-    int promedio = acomulador / (cAlumnos - 1);
-
-    System.out.println(
-        "--------------------------------------------------------------------------------");
-    System.out.printf("| %-18s: %-4s |\n", "Promedio del Grupo", promedio);
-    System.out.println("----------------------------\n");
+    /*
+     * acomulador += alumnos[i].getCalificacion();
+     * int promedio = acomulador / (cAlumnos - 1);
+     * 
+     * System.out.println(
+     * "--------------------------------------------------------------------------------"
+     * );
+     * System.out.printf("| %-18s: %-4s |\n", "Promedio del Grupo", promedio);
+     * System.out.println("----------------------------\n");
+     */
   }
 
   public void listarAulas() {
-    String format = "| %-17s | %-17s | %-17s | %-16s |\n";
+    for (Aula aula : aulas) {
+      if (aula == null)
+        return;
+      if (aula.isEliminada())
+        continue;
 
-    System.out.println("|------------------------------------ Aulas -----------------------------------|");
-    System.out.printf(format, "n", "Nombre", "Edificio", "Capacidad", "Tipo");
-
-    for (int i = 0; i < cAulas; i++) {
-      Aula aula = aulas[i];
-
-      System.out.printf(
-          format,
-          i + 1 + "",
-          aula.getNombre(),
-          aula.getEdificio(),
-          aula.getCapacidad(),
-          aula.isAula() ? "Laboratorio" : "Aula");
+      System.out.println("  > " + aula);
     }
   }
 
   public void mostrar() {
+
     String format = "%-10s: %s\n";
 
-    System.out.println("\nDatos del Curso: " + nombre);
-    System.out.printf(format, "  Clave", clave);
-    System.out.printf(format, "  Clase", nombre);
-    System.out.printf(format, "  Periodo", periodo);
-    System.out.printf(format, "  Horario", horario);
-    System.out.printf(format, "  Modalidad", presencial ? "Presencial" : "Distancia");
-    System.out.println("");
+    System.out.printf(format, "Clave", clave);
+    System.out.printf(format, "Clase", nombre);
+    System.out.printf(format, "Periodo", periodo);
+    System.out.printf(format, "Horario", horario);
+    System.out.printf(format, "Modalidad", presencial ? "Presencial" : "Distancia");
+
+    if (materia != null)
+      System.out.printf(format, "\nMateria", materia);
+
+    if (profesor != null)
+      System.out.printf(format, "\nProfesor", profesor);
+
+    for (Alumno alumno : alumnos) {
+      if (alumno == null)
+        break;
+      if (alumno.isEliminada())
+        continue;
+
+      System.out.printf(format, "\nAlumnos del Curso", "");
+      listarAlumnos();
+
+      break;
+    }
+
+    for (Aula aula : aulas) {
+      if (aula == null)
+        break;
+      if (aula.isEliminada())
+        continue;
+
+      System.out.printf(format, "\nAulas", "");
+      listarAulas();
+
+      break;
+    }
   }
 
   public void capturar() {
     Scanner sc = new Scanner(System.in);
-
-    System.out.println("\nIngrese los datos del Curso");
 
     System.out.print("Clave: ");
     clave = sc.nextLine();
@@ -210,16 +258,125 @@ public class Curso {
     System.out.print("Horario: ");
     horario = sc.nextLine();
 
-    System.out.print("1) Precencial 2) Distancia : ");
+    System.out.print("1.- Precencial 2.- Distancia : ");
     presencial = (sc.nextInt() == 1) ? true : false;
   }
 
+  public boolean buscar(String string) {
+
+    if (eliminada)
+      return false;
+
+    String cadena = clave + presencial + periodo + nombre + horario;
+
+    if (cadena.indexOf(string) != -1)
+      return true;
+
+    for (Alumno alumno : alumnos) {
+      if (alumno == null)
+        break;
+
+      if (alumno.buscar(string))
+        return true;
+    }
+
+    for (Aula aula : aulas) {
+      if (aula == null)
+        break;
+
+      if (aula.buscar(string))
+        return true;
+    }
+
+    if (profesor.buscar(string))
+      return true;
+
+    if (materia.buscar(string))
+      return true;
+
+    return false;
+  }
+
+  public void modificar() {
+  }
+
+  public boolean poseeProfesor(String rfc) {
+    if (profesor == null)
+      return false;
+
+    return profesor.equals(rfc);
+  }
+
+  public boolean poseeAula(String clave) {
+    for (Aula aula : aulas) {
+      if (aula == null)
+        return false;
+      if (aula.equals(clave))
+        return true;
+    }
+
+    return false;
+  }
+
+  public boolean poseeAlumno(String numeroControl) {
+    for (Alumno alumno : alumnos) {
+      if (alumno == null)
+        return false;
+      if (alumno.equals(numeroControl))
+        return true;
+    }
+
+    return false;
+  }
+
+  public Aula encontrarAula(String numeroControl) {
+    for (Aula aula : aulas) {
+      if (aula == null)
+        return null;
+      if (aula.isEliminada())
+        continue;
+      if (!aula.equals(clave))
+        continue;
+
+      return aula;
+    }
+
+    System.out.println("El Numero de Control no coincide con ningun Alumno.");
+
+    return null;
+  }
+
+  public Alumno encontrarAlumno(String numeroControl) {
+    for (Alumno alumno : alumnos) {
+      if (alumno == null)
+        return null;
+      if (alumno.isEliminada())
+        continue;
+      if (!alumno.equals(numeroControl))
+        continue;
+
+      return alumno;
+    }
+
+    System.out.println("El Numero de Control no coincide con ningun Alumno.");
+
+    return null;
+  }
+
   public boolean equals(String clave) {
-    return (this.clave == clave) ? true : false;
+    return this.clave.equals(clave);
   }
 
   public String toString() {
-    return nombre + "\n" + periodo;
+    return clave + " " + nombre;
+  }
+
+  public void eliminar() {
+    eliminada = true;
+  }
+
+  public boolean isEliminada() {
+    return eliminada;
   }
 
   // ENCAPSULAMIENTO
@@ -243,8 +400,12 @@ public class Curso {
     return presencial;
   }
 
-  public void setPresencial(Boolean presencial) {
+  public void setPresencial(boolean presencial) {
     this.presencial = presencial;
+  }
+
+  public void setProfesor(Profesor profesor) {
+    this.profesor = profesor;
   }
 
   public String getPeriodo() {
@@ -267,6 +428,10 @@ public class Curso {
     return materia;
   }
 
+  public boolean getPresencial() {
+    return presencial;
+  }
+
   public Profesor getProfesor() {
     return profesor;
   }
@@ -275,8 +440,42 @@ public class Curso {
     return aulas;
   }
 
+  public void setAulas(Aula[] aulas) {
+    this.aulas = aulas;
+  }
+
   public Alumno[] getAlumnos() {
     return alumnos;
   }
 
+  private int capturarOpcionNumerica(int opciones) {
+    Scanner sc = new Scanner(System.in);
+
+    do {
+      int opcion = sc.nextInt();
+      boolean range = (opcion >= 0 && opcion <= opciones);
+
+      if (range)
+        return opcion;
+
+      System.out.print("Opcion no valida, vuelva a seleccionar : ");
+
+    } while (true);
+  }
+
+  private boolean capturarOpcionBooleana() {
+    Scanner sc = new Scanner(System.in);
+
+    do {
+      int opcion = sc.nextInt();
+
+      boolean isValid = opcion == 1 || opcion == 2;
+
+      if (isValid)
+        return opcion == 1 ? true : false;
+
+      System.out.print("Opcion no valida, ¿1.-Si o 2.-No?: ");
+
+    } while (true);
+  }
 }

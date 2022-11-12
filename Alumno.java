@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
 public class Alumno extends Persona {
-  private String numeroControl;
-  private String carrera;
-  private int calificacion;
-  private char genero;
-  private Tutor tutor;
+  protected String numeroControl;
+  protected String carrera;
+  protected int calificacion;
+  protected char genero;
+  protected Tutor tutor;
 
   // Constructores
   public Alumno(String nombre, String numeroControl,
@@ -37,8 +37,6 @@ public class Alumno extends Persona {
   }
 
   public Alumno() {
-    capturar();
-
     inicialisaDatos();
   }
 
@@ -46,48 +44,117 @@ public class Alumno extends Persona {
     this.calificacion = 0;
   }
 
-  public void mostrar() {
-    String format = "%s-10: %s";
+  /* ==============================[ LOGUICA ]============================= */
+  @Override
+  public void modificar() {
+    if (eliminada)
+      return;
 
-    System.out.println("\nDatos del Alumno: " + nombre);
-    super.mostrar(format);
-    System.out.printf(format, "  No. Control", numeroControl);
-    System.out.printf(format, "  Carrera", carrera);
-    System.out.printf(format, "  Genero", genero);
-    System.out.printf(format, "  Genero", calificacion);
+    Scanner sc = new Scanner(System.in);
+
+    do {
+      System.out.println("1) Nombre 2) Correo 3) Telefono 4) Carrera");
+      System.out.println("5) Calificacion 6) Genero 7) Tutor 0) Cancelar");
+      System.out.print("Seleccione un parametro a Modificar : ");
+
+      switch (sc.nextInt()) {
+        case 0:
+          return;
+        case 1:
+          System.out.print("\nIntroduzca el nuevo nombre : ");
+          sc.nextLine();
+          nombre = sc.nextLine();
+          break;
+        case 2:
+          System.out.print("\nIntroduzca las nuevo correo : ");
+          sc.nextLine();
+          correo = sc.nextLine();
+          break;
+        case 3:
+          System.out.print("\nIntroduzca el nuevo telefono : ");
+          sc.nextLine();
+          telefono = sc.nextLine();
+          break;
+        case 4:
+          System.out.print("\nIntroduzca el nuevo carrera : ");
+          sc.nextLine();
+          carrera = sc.nextLine();
+          break;
+        case 5:
+          System.out.print("\nIntroduzca el nuevo calificacion : ");
+          sc.nextLine();
+          calificacion = sc.nextInt();
+          break;
+        case 6:
+          System.out.print("\nIntroduzca el nuevo genero : ");
+          sc.nextLine();
+          genero = sc.next().charAt(0);
+          break;
+        case 7:
+          System.out.print("\nIntroduzca el nuevo Tutor : ( -- PENDIENTE -- ) ");
+          sc.nextLine();
+          break;
+        default:
+          System.out.println("Opccion no valida. ");
+          break;
+      }
+
+      System.out.println("");
+    } while (true);
   }
 
+  @Override
   public void capturar() {
     Scanner sc = new Scanner(System.in);
 
-    System.out.println("\nIngrese los datos del \"Alumno\"");
+    super.capturar();
 
     System.out.print("No. Control: ");
     numeroControl = sc.nextLine();
-
-    System.out.print("Nombre: ");
-    nombre = sc.nextLine();
-
-    System.out.print("Telefono: ");
-    telefono = sc.nextLine();
 
     System.out.print("Carrera: ");
     carrera = sc.nextLine();
 
     System.out.print("Genero (m/f): ");
-    genero = sc.nextLine().charAt(0);
+    genero = sc.next().charAt(0);
   }
 
+  @Override
+  public void mostrar() {
+    String format = "%-15s: %s\n";
+
+    super.mostrar();
+    System.out.printf(format, "No. Control", numeroControl);
+    System.out.printf(format, "Carrera", carrera);
+    System.out.printf(format, "Genero", genero);
+    if (calificacion != 0)
+      System.out.printf(format, "Calificacion", calificacion);
+
+    if (tutor != null) {
+      System.out.println("Tutor");
+      tutor.mostrar();
+    }
+  }
+
+  @Override
   public String quienSoy() {
     return "Alumno";
   }
 
+  @Override
   public boolean equals(String numeroControl) {
-    return (this.numeroControl == numeroControl) ? true : false;
+    return (this.numeroControl.equals(numeroControl));
+  }
+
+  @Override
+  public boolean buscar(String string) {
+    String contenido = correo + nombre + telefono + eliminada + numeroControl + carrera + calificacion + genero + tutor;
+
+    return contenido.indexOf(string) >= 0 ? true : false;
   }
 
   public String toString() {
-    return nombre + "\n" + carrera;
+    return numeroControl + " " + nombre;
   }
 
   public void asignarTutor(Persona persona) {
@@ -106,22 +173,6 @@ public class Alumno extends Persona {
 
   public void setNumeroControl(String numeroControl) {
     this.numeroControl = numeroControl;
-  }
-
-  public String getNombre() {
-    return nombre;
-  }
-
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
-  }
-
-  public String getTelefono() {
-    return telefono;
-  }
-
-  public void setTelefono(String telefono) {
-    this.telefono = telefono;
   }
 
   public String getCarrera() {
